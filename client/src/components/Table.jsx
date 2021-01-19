@@ -7,7 +7,7 @@ export default function Table() {
   useEffect(() => {
     Axios({
       method: "GET",
-      url: "http://localhost:3500/users/all",
+      url: "/users/all",
     })
       .then((res) => {
         console.log(res.data);

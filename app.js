@@ -42,13 +42,17 @@ app.use(expressValidator());
 app.use(
   expressSession({ secret: "max", saveUninitialized: false, resave: false })
 );
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "client", "build")));
 
 // to display image when the address is called
 app.use("/uploads", express.static("uploads"));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
