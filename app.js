@@ -1,3 +1,4 @@
+require("dotenv").config();
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -13,7 +14,7 @@ var usersRouter = require("./routes/users");
 
 var app = express();
 
-let url = require("./config");
+let url = process.env.DB_URL;
 
 mongoose.connect(url, {
   useCreateIndex: true,
