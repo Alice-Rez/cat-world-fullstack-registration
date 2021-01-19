@@ -14,7 +14,7 @@ var usersRouter = require("./routes/users");
 
 var app = express();
 
-let url = process.env.DB_URL;
+let url = process.env.MONGODB_URI;
 
 mongoose.connect(url, {
   useCreateIndex: true,
