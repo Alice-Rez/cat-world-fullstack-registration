@@ -5,16 +5,16 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { loggContext } from "./context";
-import Home from "./Home";
-import Login from "./Login";
-import Logout from "./Logout";
-import Navigation from "./Navigation";
-import Products from "./Products";
-import Profile from "./Profile";
-import RegisterFunction from "./RegisterFunction";
-import Settings from "./Settings";
-import Table from "./Table";
+import { loggContext } from "./components/context";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Logout from "./components/Logout";
+import Navigation from "./components/Navigation";
+import Products from "./components/Products";
+import Profile from "./components/Profile";
+import RegisterFunction from "./components/RegisterFunction";
+import Settings from "./components/Settings";
+import Table from "./components/Table";
 
 export default function Main() {
   const [isLogged, setIsLogged] = useState(false);
