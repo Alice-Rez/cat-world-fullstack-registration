@@ -42,6 +42,7 @@ app.use(expressValidator());
 app.use(
   expressSession({ secret: "max", saveUninitialized: false, resave: false })
 );
+// to display React page as a static (when deployed, we have once again just 1 server, not 2, so express is serving also React)
 app.use(express.static(path.join(__dirname, "client", "build")));
 
 // to display image when the address is called
@@ -50,6 +51,7 @@ app.use("/uploads", express.static("uploads"));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
+// if we add different path, we will get the React page
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });

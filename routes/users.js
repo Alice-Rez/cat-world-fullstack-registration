@@ -4,6 +4,8 @@ var router = express.Router();
 let multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 
+require("dotenv").config();
+
 let storage = multer.diskStorage({
   destination: "uploads/images/",
   filename: function (req, file, cb) {
@@ -124,10 +126,7 @@ router.put("/updatePWD", (req, res, next) => {
 router.put("/updatePhoto", uploads.single("file"), (req, res, next) => {
   console.log(req.body);
   let { userID } = req.body;
-  UserModel.updateOne(
-    { email: userID },
-    { profileImage: "http://localhost:3500/" + req.file.path }
-  )
+  UserModel.updateOne({ email: userID }, { profileImage: req.file.path })
     .then((result) => res.send(result))
     .catch((err) => res.send(err));
 });
