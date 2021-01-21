@@ -10,22 +10,22 @@ Demo of the registration in the react app:
 
 - logged user can change password
 
-- logged user can also change profile photo (usage of multer package)
+- logged user can also set/change profile photo (usage of multer package) - not working in deployed version at heroku
 
 - basic verification by registration using express-validator
 
 No final product - no special styling (just basic bootstrap), no cleanly ordered code, etc. just playground.
 
-Full stack with Express.js backend and MongoDB database, backend part is [MongoDB-Playground repository](https://github.com/Alice-Rez/MongoDB-Playground).
+Full stack with Express.js backend and MongoDB database.
 
 Passwords are not correctly handled yet, so this exercise do not show correct way how to handle passwords!
 
 ## Setup
 
-1. clone this repository as well as [MongoDB-Playground repository](https://github.com/Alice-Rez/MongoDB-Playground)
-2. instal all dependencies using ` npm install` in both of the cloned repositories
-3. start server by `nodemon start`
-4. start frontend part by `npm start`
+1. clone this repository
+2. instal all dependencies using ` npm install` in root and `client`
+3. start server in root by `nodemon start`
+4. start frontend part in `client` by `npm start`
 5. enjoy exploring of the application
 
 ## Acknowledgement
