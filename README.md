@@ -22,6 +22,8 @@ Full stack with Express.js backend and MongoDB database.
 
 Passwords are not correctly handled yet, so this exercise do not show correct way how to handle passwords!
 
+File structure for deploying in heroku.
+
 ## Setup
 
 1. clone this repository
