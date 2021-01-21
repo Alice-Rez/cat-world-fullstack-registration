@@ -14,6 +14,8 @@ Demo of the registration in the react app:
 
 - basic verification by registration using express-validator
 
+- it is displayed under each registration field, if it did not pass validation
+
 No final product - no special styling (just basic bootstrap), no cleanly ordered code, etc. just playground.
 
 Full stack with Express.js backend and MongoDB database.
