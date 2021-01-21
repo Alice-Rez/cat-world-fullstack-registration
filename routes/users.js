@@ -94,6 +94,8 @@ router.post("/login", (req, res, next) => {
       if (result.length) {
         req.session.isLogged = true;
         console.log(result);
+        res.cookie("isLogged", true, { httpOnly: false });
+        res.cookie("userID", result[0].email, { httpOnly: true });
         res.send({
           logged: req.session.isLogged,
           uname: result[0].uname,
@@ -109,6 +111,8 @@ router.post("/login", (req, res, next) => {
 
 router.get("/logout", (req, res, next) => {
   req.session.isLogged = false;
+  res.clearCookie("isLogged");
+  res.clearCookie("userID");
   res.send({ logged: req.session.isLogged });
 });
 
