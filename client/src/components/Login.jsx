@@ -17,7 +17,10 @@ export default function Login(props) {
     Axios({
       method: "POST",
       url: "/users/login",
-      data: loginData,
+      data: JSON.stringify(loginData),
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
       .then((res) => {
         console.log(res);
