@@ -1,5 +1,5 @@
 var express = require("express");
-const { UserModel, registerUser } = require("../model/UserModel");
+const { UserModel, registerUser, checkUser } = require("../model/UserModel");
 var router = express.Router();
 let multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
@@ -82,25 +82,36 @@ router.post("/register", (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
   console.log(req.body);
-  let loginData = req.body;
-  UserModel.find(loginData)
-    .then((result) => {
-      if (result.length) {
-        req.session.isLogged = true;
-        console.log(result);
-        res.cookie("isLogged", true, { httpOnly: false });
-        res.cookie("userID", result[0].email, { httpOnly: true });
-        res.send({
-          logged: req.session.isLogged,
-          uname: result[0].uname,
-          email: result[0].email,
-        });
-      } else {
-        res.send({ logged: false });
-      }
-      console.log(result);
+  let { email, password } = req.body;
+  checkUser(email, password)
+    .then(() => {
+      res.cookie("isLogged", true, { httpOnly: false });
+      res.cookie("userID", result[0].email, { httpOnly: true });
+      res.send({
+        logged: req.session.isLogged,
+      });
     })
-    .catch((err) => res.send(err));
+    .catch((err) => {
+      res.send(err);
+    });
+  // UserModel.find(loginData)
+  //   .then((result) => {
+  //     if (result.length) {
+  //       req.session.isLogged = true;
+  //       console.log(result);
+  //       res.cookie("isLogged", true, { httpOnly: false });
+  //       res.cookie("userID", result[0].email, { httpOnly: true });
+  //       res.send({
+  //         logged: req.session.isLogged,
+  //         uname: result[0].uname,
+  //         email: result[0].email,
+  //       });
+  //     } else {
+  //       res.send({ logged: false });
+  //     }
+  //     console.log(result);
+  //   })
+  //   .catch((err) => res.send(err));
 });
 
 router.get("/logout", (req, res, next) => {

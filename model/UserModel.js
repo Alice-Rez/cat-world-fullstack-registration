@@ -30,9 +30,42 @@ function registerUser(user) {
         });
       })
       .catch((err) => {
-        reject();
+        reject(err);
       });
   });
 }
 
-module.exports = { UserModel, registerUser };
+function checkUser(email, password) {
+  console.log(email);
+  return new Promise((resolve, reject) => {
+    connect()
+      .then(() => {
+        UserModel.find({ email: email })
+          .then((users) => {
+            if (users.length) {
+              bcrypt.compareSync(password, user[0].password, (err, result) => {
+                if (err) {
+                  reject(5);
+                } else {
+                  if (result) {
+                    resolve();
+                  } else {
+                    reject(2);
+                  }
+                }
+              });
+            } else {
+              reject(3);
+            }
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      })
+      .catch((err) => {
+        reject(6);
+      });
+  });
+}
+
+module.exports = { UserModel, registerUser, checkUser };
