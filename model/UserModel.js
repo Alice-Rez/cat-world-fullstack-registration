@@ -8,6 +8,6 @@ let UserSchema = new mongoose.Schema({
   profileImage: { type: String },
 });
 
-let UserModel = mongoose.model("Alice-user", UserSchema);
+let UserModel = mongoose.model("users", UserSchema);
 
 module.exports = UserModel;
