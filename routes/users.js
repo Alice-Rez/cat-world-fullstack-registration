@@ -1,5 +1,5 @@
 var express = require("express");
-const UserModel = require("../model/UserModel");
+const { UserModel, registerUser } = require("../model/UserModel");
 var router = express.Router();
 let multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
@@ -70,17 +70,7 @@ router.post("/register", (req, res, next) => {
     res.send({ msg: errors });
   } else {
     console.log(req.body);
-    let newUser = req.body;
-
-    let addedUser = new UserModel({
-      fullName: newUser.fullName,
-      email: newUser.email,
-      uname: newUser.uname,
-      password: newUser.password,
-    });
-
-    addedUser
-      .save()
+    registerUser(req.body)
       .then((result) => res.send(result))
       .catch((err) => res.send(err));
   }

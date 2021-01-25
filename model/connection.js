@@ -25,4 +25,4 @@ function connect() {
   });
 }
 
-module.exports = connection;
+module.exports = connect;
