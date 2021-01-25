@@ -1,4 +1,5 @@
 let mongoose = require("mongoose");
+let connection = require("./connection");
 
 let UserSchema = new mongoose.Schema({
   fullName: { type: String, minlength: 2 },
@@ -10,4 +11,20 @@ let UserSchema = new mongoose.Schema({
 
 let UserModel = mongoose.model("users", UserSchema);
 
-module.exports = UserModel;
+function registerUser(user) {
+  return new Promise((resolve, reject) => {
+    connection()
+      .then(() => {
+        const newUser = new UserModel(user);
+        newUser
+          .save()
+          .then(() => resolve())
+          .catch((err) => reject(err));
+      })
+      .catch((err) => {
+        reject();
+      });
+  });
+}
+
+module.exports = { UserModel, registerUser };
