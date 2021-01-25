@@ -71,8 +71,12 @@ router.post("/register", (req, res, next) => {
   } else {
     console.log(req.body);
     registerUser(req.body)
-      .then((result) => res.send(result))
-      .catch((err) => res.send(err));
+      .then((result) => {
+        res.send(result);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
   }
 });
 

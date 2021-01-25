@@ -24,7 +24,10 @@ export default function RegisterFunction() {
     Axios({
       method: "POST",
       url: "/users/register",
-      data: data,
+      data: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
       .then((res) => {
         console.log(res);
