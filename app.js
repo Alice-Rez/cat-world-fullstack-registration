@@ -16,15 +16,15 @@ var app = express();
 
 let url = process.env.MONGODB_URI;
 
-mongoose.connect(url, {
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-});
-let db = mongoose.connection;
-db.on("error", () => {
-  console.log("error in connection");
-});
+// mongoose.connect(url, {
+//   useCreateIndex: true,
+//   useUnifiedTopology: true,
+//   useNewUrlParser: true,
+// });
+// let db = mongoose.connection;
+// db.on("error", () => {
+//   console.log("error in connection");
+// });
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
