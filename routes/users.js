@@ -101,7 +101,7 @@ router.post("/login", (req, res, next) => {
   //   .catch((err) => {
   //     res.send(err);
   //   });
-  UserModel.find(loginData)
+  UserModel.find({ loginData })
     .then((result) => {
       if (result.length) {
         req.session.isLogged = true;
