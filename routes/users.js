@@ -1,5 +1,6 @@
 var express = require("express");
 const { UserModel, registerUser, checkUser } = require("../model/UserModel");
+var jwt = require("jsonwebtoken");
 var router = express.Router();
 let multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
