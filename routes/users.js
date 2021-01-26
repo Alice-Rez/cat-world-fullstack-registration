@@ -1,10 +1,8 @@
 var express = require("express");
-const { UserModel, registerUser, checkUser } = require("../model/UserModel");
+const UserModel = require("../model/UserModel");
 var router = express.Router();
 let multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
-
-require("dotenv").config();
 
 let storage = multer.diskStorage({
   destination: "uploads/images/",
@@ -70,54 +68,45 @@ router.post("/register", (req, res, next) => {
     res.send({ msg: errors });
   } else {
     console.log(req.body);
-    registerUser(req.body)
-      .then((result) => {
-        res.send(result);
-      })
-      .catch((err) => {
-        res.send(err);
-      });
+    let newUser = req.body;
+
+    let addedUser = new UserModel({
+      fullName: newUser.fullName,
+      email: newUser.email,
+      uname: newUser.uname,
+      password: newUser.password,
+    });
+
+    addedUser
+      .save()
+      .then((result) => res.send(result))
+      .catch((err) => res.send(err));
   }
 });
 
 router.post("/login", (req, res, next) => {
   console.log(req.body);
-  let { email, password } = req.body;
-  checkUser(email, password)
-    .then(() => {
-      res.cookie("isLogged", true, { httpOnly: false });
-      res.cookie("userID", result[0].email, { httpOnly: true });
-      res.send({
-        logged: req.session.isLogged,
-      });
+  let loginData = req.body;
+  UserModel.find(loginData)
+    .then((result) => {
+      if (result.length) {
+        req.session.isLogged = true;
+        console.log(result);
+        res.send({
+          logged: req.session.isLogged,
+          uname: result[0].uname,
+          email: result[0].email,
+        });
+      } else {
+        res.send({ logged: false });
+      }
+      console.log(result);
     })
-    .catch((err) => {
-      res.send(err);
-    });
-  // UserModel.find({ email: email })
-  //   .then((result) => {
-  //     if (result.length) {
-  //       req.session.isLogged = true;
-  //       console.log(result);
-  //       res.cookie("isLogged", true, { httpOnly: false });
-  //       res.cookie("userID", result[0].email, { httpOnly: true });
-  //       res.send({
-  //         logged: req.session.isLogged,
-  //         uname: result[0].uname,
-  //         email: result[0].email,
-  //       });
-  //     } else {
-  //       res.send({ logged: false });
-  //     }
-  //     console.log(result);
-  //   })
-  //   .catch((err) => res.send(err));
+    .catch((err) => res.send(err));
 });
 
 router.get("/logout", (req, res, next) => {
   req.session.isLogged = false;
-  res.clearCookie("isLogged");
-  res.clearCookie("userID");
   res.send({ logged: req.session.isLogged });
 });
 
@@ -135,7 +124,10 @@ router.put("/updatePWD", (req, res, next) => {
 router.put("/updatePhoto", uploads.single("file"), (req, res, next) => {
   console.log(req.body);
   let { userID } = req.body;
-  UserModel.updateOne({ email: userID }, { profileImage: req.file.path })
+  UserModel.updateOne(
+    { email: userID },
+    { profileImage: "http://localhost:3500/" + req.file.path }
+  )
     .then((result) => res.send(result))
     .catch((err) => res.send(err));
 });
