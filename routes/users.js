@@ -1,8 +1,10 @@
 var express = require("express");
-const UserModel = require("../model/UserModel");
+const { UserModel, registerUser, checkUser } = require("../model/UserModel");
 var router = express.Router();
 let multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
+
+require("dotenv").config();
 
 let storage = multer.diskStorage({
   destination: "uploads/images/",
@@ -87,11 +89,25 @@ router.post("/register", (req, res, next) => {
 router.post("/login", (req, res, next) => {
   console.log(req.body);
   let loginData = req.body;
+  // let { email, password } = req.body;
+  // checkUser(email, password)
+  //   .then(() => {
+  //     res.cookie("isLogged", true, { httpOnly: false });
+  //     res.cookie("userID", result[0].email, { httpOnly: true });
+  //     res.send({
+  //       logged: req.session.isLogged,
+  //     });
+  //   })
+  //   .catch((err) => {
+  //     res.send(err);
+  //   });
   UserModel.find(loginData)
     .then((result) => {
       if (result.length) {
         req.session.isLogged = true;
         console.log(result);
+        res.cookie("isLogged", true, { httpOnly: false });
+        res.cookie("userID", result[0].email, { httpOnly: true });
         res.send({
           logged: req.session.isLogged,
           uname: result[0].uname,
@@ -107,6 +123,8 @@ router.post("/login", (req, res, next) => {
 
 router.get("/logout", (req, res, next) => {
   req.session.isLogged = false;
+  res.clearCookie("isLogged");
+  res.clearCookie("userID");
   res.send({ logged: req.session.isLogged });
 });
 
@@ -124,10 +142,7 @@ router.put("/updatePWD", (req, res, next) => {
 router.put("/updatePhoto", uploads.single("file"), (req, res, next) => {
   console.log(req.body);
   let { userID } = req.body;
-  UserModel.updateOne(
-    { email: userID },
-    { profileImage: "http://localhost:3500/" + req.file.path }
-  )
+  UserModel.updateOne({ email: userID }, { profileImage: req.file.path })
     .then((result) => res.send(result))
     .catch((err) => res.send(err));
 });
