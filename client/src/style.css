@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap");
 
+:root {
+  --primary: #8cab5c;
+  --primary-dark: #627740;
+  --primary-light: #c5d5ad;
+  --secondary: #db5d43;
+  --secondary-dark: #99412e;
+  --secondary-light: #e99d8e;
+}
+
 body {
   margin: auto;
   padding: 0;
@@ -8,19 +17,24 @@ body {
   height: 100vh;
 }
 
-header div {
-  flex-basis: 40%;
+header div,
+header figure {
+  flex-basis: 100%;
 }
 
 header img {
-  flex-basis: 60%;
+  width: 70%;
 }
 
 h1 {
   text-align: center;
-  color: #8cab5c;
+  color: var(--primary);
   font-family: "Bubblegum Sans", cursive;
   text-transform: uppercase;
+}
+
+h2 {
+  color: var(--secondary);
 }
 
 .btn {
@@ -29,8 +43,13 @@ h1 {
 }
 
 .btn-cta {
-  background-color: #db5d43;
+  background-color: var(--secondary);
   color: white;
+}
+
+.btn-submit {
+  color: white;
+  background-color: var(--primary-dark);
 }
 
 .profile-photo {
@@ -42,4 +61,18 @@ h1 {
 
 .image-input {
   min-height: 100px;
+}
+
+@media screen and (min-width: 900px) {
+  header div {
+    flex-basis: 40%;
+  }
+
+  header figure {
+    flex-basis: 60%;
+  }
+
+  header img {
+    width: 95%;
+  }
 }

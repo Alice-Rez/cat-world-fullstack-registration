@@ -4,8 +4,8 @@ import cat from "../assets/images/home_desktop.svg";
 
 export default function Home() {
   return (
-    <header className="d-flex align-items-center mt-3">
-      <div className="d-flex flex-column justify-content-center text-center">
+    <header className="d-flex align-items-center mt-3 flex-wrap-reverse">
+      <div className="d-flex flex-column justify-content-center text-center ">
         <h1 className="display-1 mx-auto mb-5">Cat world</h1>
         <p className="lead">
           {" "}
@@ -22,10 +22,12 @@ export default function Home() {
           </Link>
         </div>
       </div>
-      <img
-        src={cat}
-        alt="sitting happy cat looking on opened laptop with heart in her pawn"
-      />
+      <figure className="d-flex align-items-center justify-content-center">
+        <img
+          src={cat}
+          alt="sitting happy cat looking on opened laptop with heart in her pawn"
+        />
+      </figure>
     </header>
   );
 }
