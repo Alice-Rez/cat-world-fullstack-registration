@@ -1,15 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap");
+
 body {
   margin: auto;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: antiquewhite;
   width: 90vw;
   height: 100vh;
 }
 
-.app-title {
+header div {
+  flex-basis: 40%;
+}
+
+header img {
+  flex-basis: 60%;
+}
+
+h1 {
   text-align: center;
-  color: tomato;
+  color: #8cab5c;
+  font-family: "Bubblegum Sans", cursive;
+  text-transform: uppercase;
+}
+
+.btn {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-cta {
+  background-color: #db5d43;
+  color: white;
 }
 
 .profile-photo {

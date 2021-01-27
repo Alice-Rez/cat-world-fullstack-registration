@@ -49,7 +49,7 @@ export default function RegisterFunction() {
 
   return (
     <form className="container" onSubmit={submit} encType="multipart/form-data">
-      <h2 className="display-4 text-info py-3 text-left">Registration</h2>
+      <h2 className="display-4 py-3 text-left">Registration</h2>
       <div className="form-group">
         <label htmlFor="name">Full Name</label>
         <input
@@ -114,7 +114,7 @@ export default function RegisterFunction() {
         ) : null}
       </div>
       <div className="text-right">
-        <button type="submit" className="btn btn-success btn-lg">
+        <button type="submit" className="btn btn-submit btn-lg">
           Register
         </button>
       </div>

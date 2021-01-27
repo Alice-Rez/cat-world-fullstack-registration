@@ -18,7 +18,6 @@ export default function Table() {
 
   return (
     <main className="container d-flex justify-content-center py-5">
-      <p>{document.cookie}</p>
       <table className="table table-striped">
         <thead>
           <tr>

@@ -33,6 +33,7 @@ router.get("/all", function (req, res, next) {
 });
 
 router.get("/info/:id", function (req, res, next) {
+  console.log(req.sessionID, req.cookies);
   if (req.session.isLogged) {
     let user = req.params.id;
     UserModel.find({ email: user })
@@ -102,10 +103,11 @@ router.post("/login", (req, res, next) => {
   //   .catch((err) => {
   //     res.send(err);
   //   });
-  UserModel.find({ loginData })
+  UserModel.find(loginData)
     .then((result) => {
       if (result.length) {
         req.session.isLogged = true;
+        console.log(req.session);
         console.log(result);
         res.cookie("isLogged", true, { httpOnly: false });
         res.cookie("userID", result[0].email, { httpOnly: true });

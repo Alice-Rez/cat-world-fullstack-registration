@@ -39,7 +39,7 @@ export default function Login(props) {
 
   return (
     <div className="container">
-      <h2 className="display-4 text-info py-3 text-left">Login</h2>
+      <h2 className="display-4 py-3 text-left">Login</h2>
       <form onSubmit={submit}>
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Email address</label>
@@ -76,7 +76,7 @@ export default function Login(props) {
           </label>
         </div>
         <div className="text-right">
-          <button type="submit" className="btn btn-success btn-lg">
+          <button type="submit" className="btn btn-submit btn-lg">
             Login
           </button>
         </div>

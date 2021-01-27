@@ -5,7 +5,7 @@ import { loggContext } from "./context";
 export default function Navigation() {
   const context = useContext(loggContext);
   return (
-    <nav className="navbar navbar-expand-lg ">
+    <nav className="navbar navbar-expand-lg navbar-light my-3">
       <Link to="/home" className="navbar-brand">
         Home
       </Link>
@@ -24,13 +24,13 @@ export default function Navigation() {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-            <Link to="/users" className="nav-link">
-              Users
+            <Link to="/products" className="nav-link">
+              About us
             </Link>
           </li>
           <li className="nav-item active">
-            <Link to="/products" className="nav-link">
-              Products
+            <Link to="/users" className="nav-link">
+              Cat-Lovers
             </Link>
           </li>
           <li className="nav-item">

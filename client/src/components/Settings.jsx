@@ -86,7 +86,7 @@ export default function Settings() {
 
   return (
     <div className="container">
-      <h2 className="text-info py-3 text-left">Change Password</h2>
+      <h2 className="py-3 text-left">Change Password</h2>
       <form onSubmit={submit}>
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Current Password</label>
@@ -110,7 +110,7 @@ export default function Settings() {
           />
         </div>
         <div className="text-right">
-          <button type="submit" className="btn btn-success btn-lg">
+          <button type="submit" className="btn btn-submit btn-lg">
             Save
           </button>
         </div>
@@ -124,7 +124,7 @@ export default function Settings() {
           correct current password
         </div>
       ) : null}
-      <h2 className="text-info py-3 text-left">Change profile photo</h2>
+      <h2 className="py-3 text-left">Change profile photo</h2>
       <form encType="multipart/form-data" onSubmit={submitPhoto}>
         <div className="image-input">
           <label
@@ -157,7 +157,7 @@ export default function Settings() {
           />
         </div>
         <div className="text-right">
-          <button type="submit" className="btn btn-success btn-lg">
+          <button type="submit" className="btn btn-submit btn-lg">
             Save
           </button>
         </div>
