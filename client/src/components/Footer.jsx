@@ -9,8 +9,8 @@ export default function Footer() {
         <a href="https://icons8.com">https://icons8.com</a>
       </p>
       <p>
-        &#169;2020 <img className="logo" src={logo} alt="Alice Rez logo" />{" "}
-        Alice Rez & Isabel Costa & Willoid
+        &#169;2021 <img className="logo" src={logo} alt="Alice Rez logo" />{" "}
+        Alice Rez
       </p>
     </footer>
   );
