@@ -63,6 +63,24 @@ h2 {
   min-height: 100px;
 }
 
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  height: 4em;
+}
+
+footer img {
+  width: 25px;
+  transform: translateY(2%);
+}
+
+footer p {
+  margin-bottom: 0;
+}
+
 @media screen and (min-width: 900px) {
   header div {
     flex-basis: 40%;

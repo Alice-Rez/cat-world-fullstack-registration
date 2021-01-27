@@ -6,6 +6,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { loggContext } from "./components/context";
+import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
@@ -72,6 +73,7 @@ export default function Main() {
             <Redirect to="/home" />
           </Route>
         </Switch>
+        <Footer />
       </Router>
     </loggContext.Provider>
   );
