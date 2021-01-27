@@ -14,7 +14,12 @@ body {
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
   width: 90vw;
-  height: 100vh;
+}
+
+.wrapper {
+  min-height: 100vh;
+  display: grid;
+  align-content: space-between;
 }
 
 header div,
@@ -91,6 +96,6 @@ footer p {
   }
 
   header img {
-    width: 95%;
+    width: 90%;
   }
 }

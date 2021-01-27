@@ -16,8 +16,8 @@ export default function Home() {
           {" "}
           Find others cat-lovers and have a chat with them :)
         </p>
-        <div className="text-center">
-          <Link to="/register" className="btn btn-lg mt-5 btn-cta">
+        <div className="text-center my-5">
+          <Link to="/register" className="btn btn-lg btn-cta">
             Get started
           </Link>
         </div>

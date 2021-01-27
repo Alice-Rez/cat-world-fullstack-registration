@@ -31,49 +31,51 @@ export default function Main() {
       }}
     >
       <Router>
-        <Navigation />
-        <Switch>
-          <Route path="/home">
-            <Home />
-          </Route>
-          <Route path="/users">
-            <Table />
-          </Route>
-          <Route path="/register">
-            {isLogged ? <Redirect to="/profile" /> : <RegisterFunction />}
-          </Route>
-          <Route path="/profile">
-            <Profile />
-          </Route>
-          <Route path="/update">
-            {isLogged ? <Settings /> : <Redirect to="/log-in" />}
-          </Route>
-          <Route path="/log-in">
-            {isLogged ? (
-              <Redirect to="/profile" />
-            ) : (
-              <Login
-                setIsLogged={setIsLogged}
-                setLoggedUser={setLoggedUser}
-                setUserId={setUserId}
-              />
-            )}
-          </Route>
-          <Route path="/log-out">
-            {isLogged ? (
-              <Logout setIsLogged={setIsLogged} />
-            ) : (
-              <Redirect to="/log-in" />
-            )}
-          </Route>
-          <Route path="/products">
-            <Products />
-          </Route>
-          <Route path="*">
-            <Redirect to="/home" />
-          </Route>
-        </Switch>
-        <Footer />
+        <div className="wrapper">
+          <Navigation />
+          <Switch>
+            <Route path="/home">
+              <Home />
+            </Route>
+            <Route path="/users">
+              <Table />
+            </Route>
+            <Route path="/register">
+              {isLogged ? <Redirect to="/profile" /> : <RegisterFunction />}
+            </Route>
+            <Route path="/profile">
+              <Profile />
+            </Route>
+            <Route path="/update">
+              {isLogged ? <Settings /> : <Redirect to="/log-in" />}
+            </Route>
+            <Route path="/log-in">
+              {isLogged ? (
+                <Redirect to="/profile" />
+              ) : (
+                <Login
+                  setIsLogged={setIsLogged}
+                  setLoggedUser={setLoggedUser}
+                  setUserId={setUserId}
+                />
+              )}
+            </Route>
+            <Route path="/log-out">
+              {isLogged ? (
+                <Logout setIsLogged={setIsLogged} />
+              ) : (
+                <Redirect to="/log-in" />
+              )}
+            </Route>
+            <Route path="/products">
+              <Products />
+            </Route>
+            <Route path="*">
+              <Redirect to="/home" />
+            </Route>
+          </Switch>
+          <Footer />
+        </div>
       </Router>
     </loggContext.Provider>
   );
