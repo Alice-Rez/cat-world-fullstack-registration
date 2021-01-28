@@ -47,12 +47,13 @@ router.get("/info/:id", function (req, res, next) {
 
 router.post("/register", (req, res, next) => {
   console.log(req.body);
-  req.check("fullName", "fullname").custom((value) => {
-    return value
-      .match(/^[A-Za-z ]+$/)
-      .trim()
-      .escape();
-  });
+  req
+    .check("fullName", "fullname")
+    .custom((value) => {
+      return value.match(/^[A-Za-z ]+$/);
+    })
+    .trim()
+    .escape();
   req.check("email", "email").isEmail().trim().escape();
   req
     .check("password", "password length")
