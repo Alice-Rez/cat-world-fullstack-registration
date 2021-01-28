@@ -40,7 +40,7 @@ export default function Navigation() {
           </li>
           {context.visibility ? (
             <li className="nav-item">
-              <Link to="/update" className="nav-link">
+              <Link to="/settings" className="nav-link">
                 Settings
               </Link>
             </li>
@@ -55,11 +55,11 @@ export default function Navigation() {
         </div>
         <div>
           {context.visibility ? (
-            <Link to="/log-out" className="nav-link">
+            <Link to="/logout" className="nav-link">
               Log out
             </Link>
           ) : (
-            <Link to="/log-in" className="nav-link">
+            <Link to="/login" className="nav-link">
               Log in
             </Link>
           )}

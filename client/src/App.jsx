@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
+import Messanger from "./components/Messanger";
 import Navigation from "./components/Navigation";
 import Products from "./components/Products";
 import Profile from "./components/Profile";
@@ -38,18 +39,21 @@ export default function Main() {
               <Home />
             </Route>
             <Route path="/users">
-              <Table />
+              {isLogged ? <Table /> : <Redirect to="/login" />}
             </Route>
             <Route path="/register">
               {isLogged ? <Redirect to="/profile" /> : <RegisterFunction />}
             </Route>
             <Route path="/profile">
-              <Profile />
+              {isLogged ? <Profile /> : <Redirect to="/login" />}
             </Route>
-            <Route path="/update">
-              {isLogged ? <Settings /> : <Redirect to="/log-in" />}
+            <Route path="/settings">
+              {isLogged ? <Settings /> : <Redirect to="/login" />}
             </Route>
-            <Route path="/log-in">
+            <Route path="/messanger">
+              {isLogged ? <Messanger /> : <Redirect to="/login" />}
+            </Route>
+            <Route path="/login">
               {isLogged ? (
                 <Redirect to="/profile" />
               ) : (
@@ -60,11 +64,11 @@ export default function Main() {
                 />
               )}
             </Route>
-            <Route path="/log-out">
+            <Route path="/logout">
               {isLogged ? (
                 <Logout setIsLogged={setIsLogged} />
               ) : (
-                <Redirect to="/log-in" />
+                <Redirect to="/login" />
               )}
             </Route>
             <Route path="/products">

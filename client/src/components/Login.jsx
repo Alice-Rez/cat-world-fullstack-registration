@@ -87,7 +87,7 @@ export default function Login(props) {
         </div>
         <p className="mt-3">
           If you have no account already, please{" "}
-          <Link to="/register">sign up</Link>. Or use testing login data:
+          <Link to="/register">sign up</Link>. Testing login data:
           jane.doe@gmail.com, password 12345678910
         </p>
         {warning ? (
