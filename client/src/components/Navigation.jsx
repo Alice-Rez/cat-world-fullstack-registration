@@ -81,7 +81,7 @@ export default function Navigation() {
                 <BsThreeDotsVertical />
               </button>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <Link to="/messanger" className="nav-link">
+                <Link to="/messenger" className="nav-link">
                   Messenger
                 </Link>
                 <Link to="/settings" className="nav-link">
