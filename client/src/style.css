@@ -38,7 +38,8 @@ h1 {
   text-transform: uppercase;
 }
 
-h2 {
+h2,
+h3 {
   color: var(--secondary);
 }
 
@@ -94,6 +95,16 @@ h2 {
 .profile {
   display: grid;
   justify-content: center;
+}
+
+/* .lists {
+  display: grid;
+  justify-content: center;
+} */
+
+.lists section {
+  width: 90%;
+  max-width: 700px;
 }
 
 footer {

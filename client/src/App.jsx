@@ -12,7 +12,7 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Messanger from "./components/Messanger";
 import Navigation from "./components/Navigation";
-import Products from "./components/Products";
+import About from "./components/About";
 import Profile from "./components/Profile";
 import RegisterFunction from "./components/RegisterFunction";
 import Settings from "./components/Settings";
@@ -74,8 +74,8 @@ export default function Main() {
                 <Redirect to="/login" />
               )}
             </Route>
-            <Route path="/products">
-              <Products />
+            <Route path="/about">
+              <About />
             </Route>
             <Route path="*">
               <Redirect to="/home" />
