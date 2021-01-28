@@ -17,13 +17,13 @@ export default function Table() {
   }, []);
 
   return (
-    <main className="container d-flex justify-content-center py-5">
+    <section className="container py-5">
+      <h2 className="display-4 py-3 text-left">Cat Lovers</h2>
       <table className="table table-striped">
         <thead>
           <tr>
             <th scope="col">E-mail</th>
             <th scope="col">User Name</th>
-            <th scope="col">Full name</th>
             <th scope="col"> Photo</th>
           </tr>
         </thead>
@@ -33,7 +33,6 @@ export default function Table() {
               <tr key={index}>
                 <td>{item.email}</td>
                 <td>{item.username || item.uname}</td>
-                <td>{item.fullname || item.fullName}</td>
                 <td>
                   <img
                     src={item.profileImage}
@@ -46,6 +45,6 @@ export default function Table() {
           })}
         </tbody>
       </table>
-    </main>
+    </section>
   );
 }
