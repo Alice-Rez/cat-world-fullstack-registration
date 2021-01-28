@@ -134,7 +134,7 @@ export default function RegisterFunction() {
           </button>
         </div>
         <p className="mt-3">
-          If you are already registered, please <Link to="/log-in">login</Link>.
+          If you are already registered, please <Link to="/login">login</Link>.
         </p>
         {warning ? (
           <div className="my-5 d-flex flex-wrap-reverse align-items-center message">
