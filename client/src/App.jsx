@@ -22,6 +22,7 @@ export default function Main() {
   const [isLogged, setIsLogged] = useState(false);
   const [loggedUser, setLoggedUser] = useState("");
   const [userID, setUserId] = useState();
+  const [profilePhoto, setProfilePhoto] = useState();
 
   return (
     <loggContext.Provider
@@ -29,6 +30,7 @@ export default function Main() {
         visibility: isLogged,
         user: loggedUser,
         userID: userID,
+        profilePhoto: profilePhoto,
       }}
     >
       <Router>

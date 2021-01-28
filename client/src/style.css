@@ -64,6 +64,11 @@ h2 {
     5px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
+.profile-photo-navbar {
+  width: 30px;
+  height: 30px;
+}
+
 .image-input {
   min-height: 100px;
 }
