@@ -97,14 +97,20 @@ h3 {
   justify-content: center;
 }
 
-/* .lists {
-  display: grid;
-  justify-content: center;
-} */
+.credits-photo {
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+}
 
-.lists section {
+.lists div {
   width: 90%;
   max-width: 700px;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
 }
 
 footer {

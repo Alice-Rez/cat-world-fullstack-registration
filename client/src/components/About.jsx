@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import profile from "../assets/images/profile.jpg";
+import gingerCat from "../assets/images/gingerCat.svg";
+import github from "../assets/images/github.png";
+import icons8 from "../assets/images/icons8.svg";
 
 export default class About extends Component {
   render() {
@@ -65,7 +69,47 @@ export default class About extends Component {
         </section>
         <section>
           <h3>Credits</h3>
-          <div></div>
+          <div className="d-flex flex-wrap justify-content-around">
+            <div>
+              <figure>
+                <img
+                  src={profile}
+                  alt="picture of women with hat in blue dress with white dots"
+                  className="credits-photo"
+                />
+              </figure>
+              <h4>Alice Rez</h4>
+              <p>
+                Web developer that put this site together as a part of her
+                1-year fullstack training
+              </p>
+              <p>
+                <a href="https://github.com/Alice-Rez">
+                  <img
+                    src={github}
+                    alt="octocat - github logo"
+                    className="icon"
+                  />
+                </a>
+              </p>
+            </div>
+            <div>
+              <figure>
+                <img
+                  src={gingerCat}
+                  alt="picture of ginger cat"
+                  className="credits-photo"
+                />
+              </figure>
+              <h4>Ginger cat</h4>
+              <p>Awesome set of illustrations from icons8</p>
+              <p>
+                <a href="https://icons8.com/illustrations/illustration/ginger-cat-76">
+                  <img src={icons8} alt="icons8 logo" className="icon" />
+                </a>
+              </p>
+            </div>
+          </div>
         </section>
       </section>
     );
