@@ -48,23 +48,18 @@ router.get("/info/:id", function (req, res, next) {
 router.post("/register", (req, res, next) => {
   console.log(req.body);
   req.check("fullName", "fullname").custom((value) => {
-    return value.match(/^[A-Za-z ]+$/);
+    return value
+      .match(/^[A-Za-z ]+$/)
+      .trim()
+      .escape();
   });
-  req.check("email", "email").isEmail();
-  // req
-  //   .check("email", "user already exists")
-  //   .normalizeEmail()
-  //   .custom((validateEmail) => {
-  //     UserModel.find({ email: validateEmail })
-  //       .then((users) => {
-  //         if (users.length) {
-  //           return false;
-  //         }
-  //       })
-  //       .catch((err) => console.log(err));
-  //   });
-  req.check("password", "password length").isLength({ min: 10 });
-  req.check("uname", "uname").isAlphanumeric();
+  req.check("email", "email").isEmail().trim().escape();
+  req
+    .check("password", "password length")
+    .isLength({ min: 10 })
+    .trim()
+    .escape();
+  req.check("uname", "uname").isAlphanumeric().trim().escape();
 
   let errors = req.validationErrors();
 
@@ -90,19 +85,10 @@ router.post("/register", (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
   console.log(req.body);
+  req.check("email", "email").trim().escape();
+  req.check("password", "password length").trim().escape();
   let { email, password } = req.body;
-  // let { email, password } = req.body;
-  // checkUser(email, password)
-  //   .then(() => {
-  //     res.cookie("isLogged", true, { httpOnly: false });
-  //     res.cookie("userID", result[0].email, { httpOnly: true });
-  //     res.send({
-  //       logged: req.session.isLogged,
-  //     });
-  //   })
-  //   .catch((err) => {
-  //     res.send(err);
-  //   });
+
   UserModel.find({ email: email, password: password })
     .then((result) => {
       if (result.length) {
