@@ -1,5 +1,8 @@
 import Axios from "axios";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import login from "../assets/images/login.svg";
+import denied from "../assets/images/access_denied.svg";
 
 export default function Login(props) {
   const [loginData, setData] = useState({});
@@ -38,9 +41,18 @@ export default function Login(props) {
   };
 
   return (
-    <div className="container">
-      <h2 className="display-4 py-3 text-left">Login</h2>
+    <section className="container login">
       <form onSubmit={submit}>
+        <header className="d-flex align-items-center flex-wrap-reverse">
+          <h2 className="display-4 py-3 text-left">Login</h2>
+          <figure className="my-3 container">
+            <img
+              src={login}
+              alt="cat pawn is clicking on the login button"
+              className="message-image"
+            />
+          </figure>
+        </header>
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Email address</label>
           <input
@@ -65,28 +77,30 @@ export default function Login(props) {
             onInput={getData}
           />
         </div>
-        <div className="form-group form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="exampleCheck1"
-          />
-          <label className="form-check-label" htmlFor="exampleCheck1">
-            Check me out
-          </label>
-        </div>
         <div className="text-right">
           <button type="submit" className="btn btn-submit btn-lg">
             Login
           </button>
         </div>
+        <p className="mt-3">
+          If you have no account already, please{" "}
+          <Link to="/register">sign up</Link>. Or use testing login data:
+          jane.doe@gmail.com, password 12345678910
+        </p>
+        {warning ? (
+          <div className="my-5 d-flex flex-wrap-reverse align-items-center message">
+            <img
+              src={denied}
+              alt="cat is sadly looking on computer, because her access was denied"
+              className="message-image"
+            />
+            <p className="alert-danger p-3">
+              Access denied! Combination of the e-mail and password is not
+              correct
+            </p>
+          </div>
+        ) : null}
       </form>
-      {warning ? (
-        <div className="alert-danger m-3 p-3">
-          {" "}
-          Combination of the e-mail and password is not correct
-        </div>
-      ) : null}
-    </div>
+    </section>
   );
 }

@@ -60,7 +60,7 @@ export default function RegisterFunction() {
           <figure className="my-3 container">
             <img
               src={register}
-              alt="mobile with the bubble with cat inside of it as a "
+              alt="mobile with the bubble with cat inside of it as a metaphore for signing in"
               className="message-image"
             />
           </figure>
