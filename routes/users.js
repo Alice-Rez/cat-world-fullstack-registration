@@ -90,7 +90,7 @@ router.post("/register", (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
   console.log(req.body);
-  let loginData = req.body;
+  let { email, password } = req.body;
   // let { email, password } = req.body;
   // checkUser(email, password)
   //   .then(() => {
@@ -103,7 +103,7 @@ router.post("/login", (req, res, next) => {
   //   .catch((err) => {
   //     res.send(err);
   //   });
-  UserModel.find(loginData)
+  UserModel.find({ email: email, password: password })
     .then((result) => {
       if (result.length) {
         req.session.isLogged = true;

@@ -33,6 +33,7 @@ export default function Login(props) {
           // localStorage.setItem("isLogged", true);
           localStorage.setItem("userName", res.data.uname);
           props.setUserId(res.data.email);
+          setData({});
         } else {
           setWarning(true);
         }
@@ -62,6 +63,7 @@ export default function Login(props) {
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             onInput={getData}
+            required
           />
           <small id="emailHelp" className="form-text text-muted">
             We'll never share your email with anyone else.
@@ -75,6 +77,7 @@ export default function Login(props) {
             className="form-control"
             id="exampleInputPassword1"
             onInput={getData}
+            required
           />
         </div>
         <div className="text-right">
