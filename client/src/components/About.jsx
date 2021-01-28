@@ -9,8 +9,8 @@ export default class About extends Component {
           This page was created as a exercise for creating fullstack MERN user
           interface.{" "}
         </p>
-        <div className="lists d-flex flex-wrap justify-content-between">
-          <section>
+        <section className="lists d-flex flex-wrap justify-content-between">
+          <div>
             <strong className="text-left mb-2">Implemented are:</strong>
             <ul className="text-left">
               <li>
@@ -49,9 +49,9 @@ export default class About extends Component {
               </li>
               <li>Database schema using Mongoose</li>
             </ul>
-          </section>
+          </div>
 
-          <section>
+          <div>
             <strong className="text-left mb-2"> feature plans</strong>
             <ul className="text-left">
               <li>
@@ -61,10 +61,11 @@ export default class About extends Component {
               <li>encrypting (hashing) passwords</li>
               <li>Authentication using JWT</li>
             </ul>
-          </section>
-        </div>
+          </div>
+        </section>
         <section>
           <h3>Credits</h3>
+          <div></div>
         </section>
       </section>
     );
