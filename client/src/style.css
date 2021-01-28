@@ -73,6 +73,10 @@ h2 {
   min-height: 100px;
 }
 
+.image-full {
+  width: 90%;
+}
+
 .smaller-image {
   width: 90%;
   max-width: 500px;
@@ -85,6 +89,11 @@ h2 {
 .message-image {
   width: 90%;
   max-width: 300px;
+}
+
+.profile {
+  display: grid;
+  justify-content: center;
 }
 
 footer {
