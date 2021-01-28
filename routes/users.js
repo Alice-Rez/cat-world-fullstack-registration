@@ -97,10 +97,12 @@ router.post("/login", (req, res, next) => {
         console.log(result);
         res.cookie("isLogged", true, { httpOnly: false });
         res.cookie("userID", result[0].email, { httpOnly: true });
+        let user = result[0];
         res.send({
           logged: req.session.isLogged,
-          uname: result[0].uname,
-          email: result[0].email,
+          uname: user.uname,
+          email: user.email,
+          profileImage: user.profileImage,
         });
       } else {
         res.send({ logged: false });

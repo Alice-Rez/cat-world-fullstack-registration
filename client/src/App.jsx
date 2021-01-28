@@ -63,6 +63,7 @@ export default function Main() {
                   setIsLogged={setIsLogged}
                   setLoggedUser={setLoggedUser}
                   setUserId={setUserId}
+                  setProfilePhoto={setProfilePhoto}
                 />
               )}
             </Route>
