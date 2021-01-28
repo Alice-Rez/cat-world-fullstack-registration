@@ -68,6 +68,20 @@ h2 {
   min-height: 100px;
 }
 
+.smaller-image {
+  width: 90%;
+  max-width: 500px;
+}
+
+.message {
+  gap: 3em;
+}
+
+.message-image {
+  width: 90%;
+  max-width: 300px;
+}
+
 footer {
   display: flex;
   flex-direction: column;
