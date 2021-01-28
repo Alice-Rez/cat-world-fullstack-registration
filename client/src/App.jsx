@@ -10,13 +10,13 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
-import Messanger from "./components/Messanger";
 import Navigation from "./components/Navigation";
 import About from "./components/About";
 import Profile from "./components/Profile";
 import RegisterFunction from "./components/RegisterFunction";
 import Settings from "./components/Settings";
-import Table from "./components/Table";
+import Users from "./components/Users";
+import Messenger from "./components/Messenger";
 
 export default function Main() {
   const [isLogged, setIsLogged] = useState(false);
@@ -41,7 +41,7 @@ export default function Main() {
               <Home />
             </Route>
             <Route path="/users">
-              {isLogged ? <Table /> : <Redirect to="/login" />}
+              {isLogged ? <Users /> : <Redirect to="/login" />}
             </Route>
             <Route path="/register">
               {isLogged ? <Redirect to="/profile" /> : <RegisterFunction />}
@@ -53,7 +53,7 @@ export default function Main() {
               {isLogged ? <Settings /> : <Redirect to="/login" />}
             </Route>
             <Route path="/messenger">
-              {isLogged ? <Messanger /> : <Redirect to="/login" />}
+              {isLogged ? <Messenger /> : <Redirect to="/login" />}
             </Route>
             <Route path="/login">
               {isLogged ? (

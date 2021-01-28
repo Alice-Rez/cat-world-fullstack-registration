@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import lovers from "../assets/images/lovers.svg";
 
-export default function Table() {
+export default function Users() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
