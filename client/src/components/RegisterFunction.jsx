@@ -42,7 +42,7 @@ export default function RegisterFunction() {
           setWarningContent(Object.keys(res.data.keyValue)[0]);
           setWarning(true);
         } else {
-          history.push("/log-in");
+          history.push("/login");
         }
       })
       .catch((err) => console.log(err));
