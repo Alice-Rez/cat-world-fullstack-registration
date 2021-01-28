@@ -52,8 +52,8 @@ export default function Main() {
             <Route path="/settings">
               {isLogged ? <Settings /> : <Redirect to="/login" />}
             </Route>
-            <Route path="/messanger">
-              {isLogged ? <Messanger /> : <Redirect to="/login" />}
+            <Route path="/messenger">
+              {true ? <Messanger /> : <Redirect to="/login" />}
             </Route>
             <Route path="/login">
               {isLogged ? (
