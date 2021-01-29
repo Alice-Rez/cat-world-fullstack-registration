@@ -21,20 +21,26 @@ let uploads = multer({ storage: storage, limits: { fileSize: 1000000 } });
 /* GET users listing. */
 router.get("/all", function (req, res, next) {
   UserModel.find()
+    .select(["-password"])
     .then((result) => res.send(result))
     .catch((err) => res.send(err));
 });
 
-router.get("/info/:id", function (req, res, next) {
+router.get("/info", function (req, res, next) {
   const myCookies = req.cookies;
-  console.log(myCookies);
-  const userID = jwt.verify(myCookies.token, process.env.SECRET);
-  console.log(userID);
-  // let user = req.params.id;
-  UserModel.findById(userID)
-    .select("-password")
-    .then((result) => res.send(result))
-    .catch((err) => res.send(err));
+  jwt.verify(myCookies.token, "wrongToken", (err, decoded) => {
+    if (err) {
+      res.send(err);
+    }
+    console.log(decoded);
+    UserModel.findById(decoded.id)
+      .select(["-password", "-email"])
+      .then((result) => {
+        console.log(result);
+        res.send(result);
+      })
+      .catch((err) => res.send(err));
+  });
 });
 
 router.post("/register", (req, res, next) => {

@@ -15,12 +15,12 @@ export default function Settings() {
   useEffect(() => {
     Axios({
       method: "GET",
-      url: `users/info/${userID}`,
+      url: `users/info`,
     })
       .then((res) => {
         console.log(res);
-        if (Array.isArray(res.data)) {
-          setImage({ ...image, preview: res.data[0].profileImage });
+        if (res.data._id) {
+          setImage({ ...image, preview: res.data.profileImage });
         } else {
           console.log("you are not logged!");
         }
