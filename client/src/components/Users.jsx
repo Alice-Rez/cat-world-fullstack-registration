@@ -25,7 +25,10 @@ export default function Users() {
           setUsers(res.data);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        history.push("/ooo");
+      });
   }, []);
 
   return (

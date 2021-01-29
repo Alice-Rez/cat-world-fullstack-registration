@@ -21,7 +21,7 @@ let uploads = multer({ storage: storage, limits: { fileSize: 1000000 } });
 /* GET users listing. */
 router.get("/all", function (req, res, next) {
   const myCookies = req.cookies;
-  jwt.verify(myCookies.token, "wrongToken", (err, decoded) => {
+  jwt.verify(myCookies.token, process.env.SECRET, (err, decoded) => {
     if (err) {
       res.send({ errorSource: "JWT" });
     }
@@ -34,7 +34,7 @@ router.get("/all", function (req, res, next) {
 
 router.get("/info", function (req, res, next) {
   const myCookies = req.cookies;
-  jwt.verify(myCookies.token, "wrongToken", (err, decoded) => {
+  jwt.verify(myCookies.token, process.env.SECRET, (err, decoded) => {
     if (err) {
       res.send({ errorSource: "JWT" });
     }
@@ -98,12 +98,12 @@ router.post("/login", (req, res, next) => {
     .then((result) => {
       if (result.length) {
         let token = jwt.sign({ id: result[0]._id }, process.env.SECRET, {
-          expiresIn: "1h",
+          expiresIn: "2h",
         });
         res.cookie("token", token, {
           httpOnly: true,
-          sameSite: "strict",
-          secure: true,
+          // sameSite: "strict",
+          // secure: true,
         });
         console.log(token);
         // console.log("user ID:", result[0]._id);
