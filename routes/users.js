@@ -26,8 +26,12 @@ router.get("/all", function (req, res, next) {
 });
 
 router.get("/info/:id", function (req, res, next) {
-  let user = req.params.id;
-  UserModel.find({ email: user })
+  const myCookies = req.cookies;
+  console.log(myCookies);
+  const userID = jwt.verify(myCookies.token, process.env.SECRET);
+  console.log(userID);
+  // let user = req.params.id;
+  UserModel.findById(userID)
     .select("-password")
     .then((result) => res.send(result))
     .catch((err) => res.send(err));
@@ -81,9 +85,16 @@ router.post("/login", (req, res, next) => {
   UserModel.find({ email: email, password: password })
     .then((result) => {
       if (result.length) {
-        let token = jwt.sign({ name: "fahim" }, process.env.SECRET);
+        let token = jwt.sign({ id: result[0]._id }, process.env.SECRET, {
+          expiresIn: "1h",
+        });
+        res.cookie("token", token, {
+          httpOnly: true,
+          sameSite: "strict",
+          secure: true,
+        });
         console.log(token);
-        console.log("user ID:", result[0]._id);
+        // console.log("user ID:", result[0]._id);
         // res.cookie("isLogged", true, { httpOnly: false });
         let user = result[0];
         res.send({
