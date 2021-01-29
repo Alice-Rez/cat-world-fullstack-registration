@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Axios from "axios";
+import { loggContext } from "./context";
 import lovers from "../assets/images/lovers.svg";
 
 export default function Users() {
+  const { setIsLogged } = useContext(loggContext);
+
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -12,7 +15,12 @@ export default function Users() {
     })
       .then((res) => {
         console.log(res.data);
-        setUsers(res.data);
+        if (res.data.errorSource === "JWT") {
+          alert("Authentication failed. Please login once again.");
+          setIsLogged(false);
+        } else {
+          setUsers(res.data);
+        }
       })
       .catch((err) => console.log(err));
   }, []);

@@ -92,7 +92,8 @@ h3 {
   max-width: 300px;
 }
 
-.profile {
+.profile,
+.errorPage {
   display: grid;
   justify-content: center;
 }

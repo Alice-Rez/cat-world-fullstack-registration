@@ -12,6 +12,7 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Navigation from "./components/Navigation";
 import About from "./components/About";
+import Error from "./components/Error";
 import Profile from "./components/Profile";
 import RegisterFunction from "./components/RegisterFunction";
 import Settings from "./components/Settings";
@@ -31,6 +32,7 @@ export default function Main() {
         user: loggedUser,
         userID: userID,
         profilePhoto: profilePhoto,
+        setIsLogged: setIsLogged,
       }}
     >
       <Router>
@@ -60,7 +62,6 @@ export default function Main() {
                 <Redirect to="/profile" />
               ) : (
                 <Login
-                  setIsLogged={setIsLogged}
                   setLoggedUser={setLoggedUser}
                   setUserId={setUserId}
                   setProfilePhoto={setProfilePhoto}
@@ -76,6 +77,9 @@ export default function Main() {
             </Route>
             <Route path="/about">
               <About />
+            </Route>
+            <Route path="/error">
+              <Error />
             </Route>
             <Route path="*">
               <Redirect to="/home" />

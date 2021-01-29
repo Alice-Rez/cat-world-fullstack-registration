@@ -1,10 +1,13 @@
 import Axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { loggContext } from "./context";
 import login from "../assets/images/login.svg";
 import denied from "../assets/images/access_denied.svg";
 
 export default function Login(props) {
+  const { setIsLogged } = useContext(loggContext);
+
   const [loginData, setData] = useState({});
   const [warning, setWarning] = useState(false);
 
@@ -28,7 +31,7 @@ export default function Login(props) {
       .then((res) => {
         console.log(res);
         if (res.data.logged) {
-          props.setIsLogged(true);
+          setIsLogged(true);
           props.setLoggedUser(res.data.uname);
           props.setUserId(res.data.email);
           props.setProfilePhoto(res.data.profileImage);
