@@ -13,6 +13,7 @@ import Logout from "./components/Logout";
 import Navigation from "./components/Navigation";
 import About from "./components/About";
 import Error from "./components/Error";
+import Maintance from "./components/Maintance";
 import Profile from "./components/Profile";
 import RegisterFunction from "./components/RegisterFunction";
 import Settings from "./components/Settings";
@@ -80,6 +81,9 @@ export default function Main() {
             </Route>
             <Route path="/error">
               <Error />
+            </Route>
+            <Route path="/ooo">
+              <Maintance />
             </Route>
             <Route path="*">
               <Redirect to="/home" />

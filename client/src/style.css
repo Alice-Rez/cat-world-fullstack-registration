@@ -92,6 +92,11 @@ h3 {
   max-width: 300px;
 }
 
+.message-image-lg {
+  width: 90%;
+  max-width: 600px;
+}
+
 .profile,
 .errorPage {
   display: grid;

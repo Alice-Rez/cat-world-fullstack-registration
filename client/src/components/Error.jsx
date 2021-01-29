@@ -8,9 +8,9 @@ export default function Error() {
       <img
         src={denied}
         alt="cat is sadly looking on computer, because her access was denied"
-        className="message-image"
+        className="message-image-lg"
       />
-      <p className="alert-danger p-3">
+      <p className="alert-danger p-3 text-center">
         Authentication failed. Please <Link to="/login">login</Link> once again.
       </p>
     </section>

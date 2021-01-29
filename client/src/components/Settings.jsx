@@ -1,11 +1,11 @@
-import React, { useState, useContext, useEffect, useHistory } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Axios from "axios";
 import { loggContext } from "./context";
 import { FaUserCircle } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
 
 export default function Settings() {
   const { userID, setIsLogged } = useContext(loggContext);
-  const history = useHistory();
 
   const [image, setImage] = useState({ preview: "", raw: "" });
 
@@ -13,6 +13,8 @@ export default function Settings() {
   const [success, setSuccess] = useState(false);
   const [photoSuccess, setPhotoSuccess] = useState(false);
   const [warning, setWarning] = useState(false);
+
+  let history = useHistory();
 
   useEffect(() => {
     Axios({
