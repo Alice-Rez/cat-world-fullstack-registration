@@ -12,16 +12,9 @@ let storage = multer.diskStorage({
   filename: function (req, file, cb) {
     console.log("###########");
     console.log(req.body);
-    cb(
-      null,
-      /*req.body.email.split("@")[0] + "-" + Date.now() + "." // +
-      file.mimetype.split("/")[1] */
-      uuidv4() + "." + file.mimetype.split("/")[1]
-    );
+    cb(null, uuidv4() + "." + file.mimetype.split("/")[1]);
   },
 });
-
-// we can limit size of file - imageSize is in bites
 
 let uploads = multer({ storage: storage, limits: { fileSize: 1000000 } });
 
@@ -33,16 +26,11 @@ router.get("/all", function (req, res, next) {
 });
 
 router.get("/info/:id", function (req, res, next) {
-  console.log(req.sessionID, req.cookies);
-  if (req.session.isLogged) {
-    let user = req.params.id;
-    UserModel.find({ email: user })
-      .select("-password")
-      .then((result) => res.send(result))
-      .catch((err) => res.send(err));
-  } else {
-    res.send("you have to log-in to see this information");
-  }
+  let user = req.params.id;
+  UserModel.find({ email: user })
+    .select("-password")
+    .then((result) => res.send(result))
+    .catch((err) => res.send(err));
 });
 
 router.post("/register", (req, res, next) => {
@@ -85,6 +73,7 @@ router.post("/register", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
+  console.log("uuid:", uuidv4());
   console.log(req.body);
   req.check("email", "email").trim().escape();
   req.check("password", "password length").trim().escape();
@@ -93,14 +82,12 @@ router.post("/login", (req, res, next) => {
   UserModel.find({ email: email, password: password })
     .then((result) => {
       if (result.length) {
-        req.session.isLogged = true;
-        console.log(req.session);
-        console.log(result);
-        res.cookie("isLogged", true, { httpOnly: false });
-        res.cookie("userID", result[0].email, { httpOnly: true });
+        // let token = jwt.sign({ name: "fahim" }, process.env.secret);
+        console.log("user ID:", result[0]._id);
+        // res.cookie("isLogged", true, { httpOnly: false });
         let user = result[0];
         res.send({
-          logged: req.session.isLogged,
+          logged: true,
           uname: user.uname,
           email: user.email,
           profileImage: user.profileImage,
@@ -114,10 +101,7 @@ router.post("/login", (req, res, next) => {
 });
 
 router.get("/logout", (req, res, next) => {
-  req.session.isLogged = false;
-  res.clearCookie("isLogged");
-  res.clearCookie("userID");
-  res.send({ logged: req.session.isLogged });
+  res.send({ logged: false });
 });
 
 router.put("/updatePWD", (req, res, next) => {

@@ -71,7 +71,7 @@ export default function Navigation() {
           {context.visibility ? (
             <li class="nav-item nav-item active dropdown">
               <button
-                class="nav-link dropdown-toggle btn"
+                className="nav-link dropdown-toggle btn"
                 id="navbarDropdown"
                 role="button"
                 data-toggle="dropdown"
@@ -80,14 +80,14 @@ export default function Navigation() {
               >
                 <BsThreeDotsVertical />
               </button>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <Link to="/messenger" className="nav-link">
                   Messenger
                 </Link>
                 <Link to="/settings" className="nav-link">
                   Settings
                 </Link>
-                <div class="dropdown-divider"></div>
+                <div className="dropdown-divider"></div>
                 <Link to="/logout" className="nav-link ">
                   Log out
                 </Link>
