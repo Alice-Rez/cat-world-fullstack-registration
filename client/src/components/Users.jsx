@@ -2,11 +2,14 @@ import React, { useState, useEffect, useContext } from "react";
 import Axios from "axios";
 import { loggContext } from "./context";
 import lovers from "../assets/images/lovers.svg";
+import { useHistory } from "react-router-dom";
 
 export default function Users() {
   const { setIsLogged } = useContext(loggContext);
 
   const [users, setUsers] = useState([]);
+
+  const history = useHistory();
 
   useEffect(() => {
     Axios({
@@ -16,7 +19,7 @@ export default function Users() {
       .then((res) => {
         console.log(res.data);
         if (res.data.errorSource === "JWT") {
-          alert("Authentication failed. Please login once again.");
+          history.push("/error");
           setIsLogged(false);
         } else {
           setUsers(res.data);

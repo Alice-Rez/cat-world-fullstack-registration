@@ -1,10 +1,12 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useHistory } from "react";
 import Axios from "axios";
 import { loggContext } from "./context";
 import { FaUserCircle } from "react-icons/fa";
 
 export default function Settings() {
-  const { userID } = useContext(loggContext);
+  const { userID, setIsLogged } = useContext(loggContext);
+  const history = useHistory();
+
   const [image, setImage] = useState({ preview: "", raw: "" });
 
   const [data, setData] = useState({ userID });
@@ -19,7 +21,10 @@ export default function Settings() {
     })
       .then((res) => {
         console.log(res);
-        if (res.data._id) {
+        if (res.data.errorSource === "JWT") {
+          history.push("/error");
+          setIsLogged(false);
+        } else if (res.data._id) {
           setImage({ ...image, preview: res.data.profileImage });
         } else {
           console.log("you are not logged!");

@@ -69,7 +69,7 @@ export default function Navigation() {
             )}
           </li>
           {context.visibility ? (
-            <li class="nav-item nav-item active dropdown">
+            <li className="nav-item nav-item active dropdown">
               <button
                 className="nav-link dropdown-toggle btn"
                 id="navbarDropdown"
