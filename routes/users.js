@@ -73,7 +73,6 @@ router.post("/register", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
-  console.log("uuid:", uuidv4());
   console.log(req.body);
   req.check("email", "email").trim().escape();
   req.check("password", "password length").trim().escape();
@@ -82,7 +81,8 @@ router.post("/login", (req, res, next) => {
   UserModel.find({ email: email, password: password })
     .then((result) => {
       if (result.length) {
-        // let token = jwt.sign({ name: "fahim" }, process.env.secret);
+        let token = jwt.sign({ name: "fahim" }, process.env.SECRET);
+        console.log(token);
         console.log("user ID:", result[0]._id);
         // res.cookie("isLogged", true, { httpOnly: false });
         let user = result[0];
