@@ -32,7 +32,10 @@ export default function Settings() {
           console.log("you are not logged!");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        history.push("/ooo");
+      });
   }, []);
 
   const getValue = (e) => {
