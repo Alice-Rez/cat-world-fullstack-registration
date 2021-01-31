@@ -20,7 +20,7 @@ let storage = multer.diskStorage({
 let uploads = multer({ storage: storage, limits: { fileSize: 1000000 } });
 
 /* GET users listing. */
-router.get("/all", authenticateToken, function (req, res, next) {
+router.get("/all", authenticateToken, (req, res, next) => {
   UserModel.find()
     .select(["-password"])
     .then((result) => {
@@ -31,7 +31,7 @@ router.get("/all", authenticateToken, function (req, res, next) {
     });
 });
 
-router.get("/info", authenticateToken, function (req, res, next) {
+router.get("/info", authenticateToken, (req, res, next) => {
   const user = req.user;
   UserModel.findById(user.id)
     .select(["-password", "-email"])
