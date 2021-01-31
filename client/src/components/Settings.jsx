@@ -5,17 +5,13 @@ import { FaUserCircle } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 
 export default function Settings() {
-  const {
-    userID,
-    setIsLogged,
-    profilePhoto,
-    setProfilePhoto,
-    setUpdate,
-  } = useContext(loggContext);
+  const { setIsLogged, profilePhoto, setProfilePhoto, setUpdate } = useContext(
+    loggContext
+  );
 
   const [image, setImage] = useState({ preview: "", raw: "" });
 
-  const [data, setData] = useState({ userID });
+  const [data, setData] = useState();
   const [success, setSuccess] = useState(false);
   const [warning, setWarning] = useState(false);
   const [photoSuccess, setPhotoSuccess] = useState(false);
