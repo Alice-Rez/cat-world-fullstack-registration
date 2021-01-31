@@ -132,12 +132,28 @@ router.put("/updatePWD", (req, res, next) => {
     .catch((err) => res.send(err));
 });
 
-router.put("/updatePhoto", uploads.single("file"), (req, res, next) => {
-  console.log(req.body);
-  let { userID } = req.body;
-  UserModel.updateOne({ email: userID }, { profileImage: req.file.path })
-    .then((result) => res.send(result))
-    .catch((err) => res.send(err));
-});
+router.put(
+  "/updatePhoto",
+  authenticateToken,
+  uploads.single("file"),
+  (req, res, next) => {
+    console.log(req.body);
+    const userID = req.user.id;
+    UserModel.findByIdAndUpdate(
+      "6013d74a20ee320015cecfa4",
+      {
+        profileImage: req.file.path,
+      },
+      { useFindAndModify: false }
+    )
+      .then((result) => {
+        console.log(result);
+        res.send(result);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  }
+);
 
 module.exports = router;

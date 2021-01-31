@@ -80,7 +80,6 @@ export default function Settings() {
 
     let formData = new FormData();
     formData.append("file", image.raw);
-    formData.append("userID", userID);
 
     Axios({
       method: "PUT",
@@ -89,7 +88,9 @@ export default function Settings() {
     })
       .then((res) => {
         console.log(res);
-        setPhotoSuccess(true);
+        if (res.data.nModified > 0) {
+          setPhotoSuccess(true);
+        }
       })
       .catch((err) => console.log(err));
   };
