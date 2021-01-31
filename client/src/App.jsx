@@ -31,7 +31,6 @@ export default function Main() {
       value={{
         visibility: isLogged,
         user: loggedUser,
-        userID,
         profilePhoto,
         setIsLogged,
         setProfilePhoto,
