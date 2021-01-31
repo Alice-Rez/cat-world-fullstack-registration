@@ -136,7 +136,6 @@ router.post("/login", (req, res, next) => {
       } else {
         res.send({ logged: false });
       }
-      console.log(result);
     })
     .catch((err) => res.send(err));
 });
