@@ -21,7 +21,7 @@ let uploads = multer({ storage: storage, limits: { fileSize: 1000000 } });
 /* GET users listing. */
 router.get("/all", function (req, res, next) {
   const myCookies = req.cookies;
-  jwt.verify(myCookies.token, process.env.SECRET, (err, decoded) => {
+  jwt.verify(myCookies.token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
       res.send({ errorSource: "JWT" });
     }
@@ -34,7 +34,7 @@ router.get("/all", function (req, res, next) {
 
 router.get("/info", function (req, res, next) {
   const myCookies = req.cookies;
-  jwt.verify(myCookies.token, process.env.SECRET, (err, decoded) => {
+  jwt.verify(myCookies.token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
       res.send({ errorSource: "JWT" });
     }
