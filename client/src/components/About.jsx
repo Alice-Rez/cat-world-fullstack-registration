@@ -52,6 +52,7 @@ export default class About extends Component {
                 to database.{" "}
               </li>
               <li>Database schema using Mongoose</li>
+              <li>Authentication using JWT</li>
             </ul>
           </div>
 
@@ -63,7 +64,6 @@ export default class About extends Component {
                 emails in the user list)
               </li>
               <li>encrypting (hashing) passwords</li>
-              <li>Authentication using JWT</li>
             </ul>
           </div>
         </section>
