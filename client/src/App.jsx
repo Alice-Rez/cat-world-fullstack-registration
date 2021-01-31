@@ -31,10 +31,10 @@ export default function Main() {
       value={{
         visibility: isLogged,
         user: loggedUser,
-        userID: userID,
-        profilePhoto: profilePhoto,
-        setIsLogged: setIsLogged,
-        setProfilePhoto: setProfilePhoto,
+        userID,
+        profilePhoto,
+        setIsLogged,
+        setProfilePhoto,
       }}
     >
       <Router>

@@ -142,15 +142,16 @@ router.put(
     console.log(req.body);
     const userID = req.user.id;
     UserModel.findByIdAndUpdate(
-      "6013d74a20ee320015cecfa4",
+      userID,
       {
         profileImage: req.file.path,
       },
       { useFindAndModify: false }
     )
       .then((result) => {
+        console.log(result);
         if (result) {
-          res.send({ updated: true });
+          res.send({ updated: true, profileImage: req.file.path });
         } else {
           res.send({ updated: false });
         }
