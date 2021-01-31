@@ -10,7 +10,7 @@ export default function Messenger() {
         alt="profile page of ginger cat - with profile photo and information"
         className="image-full"
       />
-      <p className="alert-danger">You have no message</p>
+      <p className="alert-danger p-3">You have no message</p>
     </section>
   );
 }

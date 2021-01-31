@@ -97,13 +97,13 @@ router.post("/login", (req, res, next) => {
   UserModel.find({ email: email, password: password })
     .then((result) => {
       if (result.length) {
-        let token = jwt.sign({ id: result[0]._id }, process.env.SECRET, {
-          expiresIn: "2h",
+        let token = jwt.sign({ id: result[0]._id }, process.env.JWT_SECRET, {
+          expiresIn: "3d",
         });
         res.cookie("token", token, {
           httpOnly: true,
-          // sameSite: "strict",
-          // secure: true,
+          sameSite: "strict",
+          // secure: true, // causing problems with cat-lovers!
         });
         console.log(token);
         // console.log("user ID:", result[0]._id);
