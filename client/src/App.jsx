@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import Axios from "axios";
 import {
   BrowserRouter as Router,
   Switch,
@@ -23,8 +25,30 @@ import Messenger from "./components/Messenger";
 export default function Main() {
   const [isLogged, setIsLogged] = useState(false);
   const [loggedUser, setLoggedUser] = useState("");
-  const [userID, setUserId] = useState();
   const [profilePhoto, setProfilePhoto] = useState();
+
+  let history = useHistory();
+
+  useEffect(() => {
+    Axios({
+      method: "GET",
+      url: `users/auth`,
+    })
+      .then((res) => {
+        if (res.data.authorized) {
+          console.log(res.data);
+          setIsLogged(true);
+          setLoggedUser(res.data.uname);
+          setProfilePhoto(res.data.profileImage);
+        } else {
+          setIsLogged(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        // history.push("/ooo");
+      });
+  }, []);
 
   return (
     <loggContext.Provider
@@ -62,7 +86,7 @@ export default function Main() {
               {isLogged ? (
                 <Redirect to="/profile" />
               ) : (
-                <Login setLoggedUser={setLoggedUser} setUserId={setUserId} />
+                <Login setLoggedUser={setLoggedUser} />
               )}
             </Route>
             <Route path="/logout">

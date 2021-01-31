@@ -33,7 +33,6 @@ export default function Login(props) {
         if (res.data.logged) {
           setIsLogged(true);
           props.setLoggedUser(res.data.uname);
-          props.setUserId(res.data.email);
           setProfilePhoto(res.data.profileImage);
           setData({});
         } else {

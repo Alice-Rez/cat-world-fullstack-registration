@@ -20,6 +20,32 @@ let storage = multer.diskStorage({
 let uploads = multer({ storage: storage, limits: { fileSize: 1000000 } });
 
 /* GET users listing. */
+
+router.get("/auth", authenticateToken, (req, res, next) => {
+  const user = req.user;
+  let token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+    expiresIn: "3d",
+  });
+  res.cookie("token", token, {
+    httpOnly: true,
+    sameSite: "strict",
+    // secure: true, // causing problems with cat-lovers!
+  });
+  UserModel.findById(user.id)
+    .select(["-password", "-email"])
+    .then((result) => {
+      console.log(result);
+      res.send({
+        authorized: true,
+        uname: result.uname,
+        profileImage: result.profileImage,
+      });
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
 router.get("/all", authenticateToken, (req, res, next) => {
   UserModel.find()
     .select(["-password"])
@@ -101,13 +127,10 @@ router.post("/login", (req, res, next) => {
           // secure: true, // causing problems with cat-lovers!
         });
         console.log(token);
-        // console.log("user ID:", result[0]._id);
-        // res.cookie("isLogged", true, { httpOnly: false });
         let user = result[0];
         res.send({
           logged: true,
           uname: user.uname,
-          email: user.email,
           profileImage: user.profileImage,
         });
       } else {
