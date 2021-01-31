@@ -123,15 +123,19 @@ router.get("/logout", (req, res, next) => {
   res.send({ logged: false });
 });
 
-router.put("/updatePWD", (req, res, next) => {
-  console.log(req.body);
-  let { userID, password, newPassword } = req.body;
+router.put("/updatePWD", authenticateToken, (req, res, next) => {
+  const userID = req.user.id;
+  let { password, newPassword } = req.body;
   UserModel.updateOne(
-    { email: userID, password: password },
+    { _id: userID, password: password },
     { password: newPassword }
   )
-    .then((result) => res.send(result))
-    .catch((err) => res.send(err));
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 });
 
 router.put(
