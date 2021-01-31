@@ -124,6 +124,7 @@ router.post("/login", (req, res, next) => {
 });
 
 router.get("/logout", (req, res, next) => {
+  res.clearCookie("token");
   res.send({ logged: false });
 });
 
