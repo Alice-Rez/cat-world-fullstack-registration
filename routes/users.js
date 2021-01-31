@@ -4,6 +4,7 @@ var jwt = require("jsonwebtoken");
 var router = express.Router();
 let multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
+const { authenticateToken } = require("../controllers/authControllers");
 
 require("dotenv").config();
 
@@ -19,34 +20,26 @@ let storage = multer.diskStorage({
 let uploads = multer({ storage: storage, limits: { fileSize: 1000000 } });
 
 /* GET users listing. */
-router.get("/all", function (req, res, next) {
-  const myCookies = req.cookies;
-  jwt.verify(myCookies.token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      res.send({ errorSource: "JWT" });
-    }
-    UserModel.find()
-      .select(["-password"])
-      .then((result) => res.send(result))
-      .catch((err) => res.send({ err }));
-  });
+router.get("/all", authenticateToken, function (req, res, next) {
+  UserModel.find()
+    .select(["-password"])
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send({ err });
+    });
 });
 
-router.get("/info", function (req, res, next) {
-  const myCookies = req.cookies;
-  jwt.verify(myCookies.token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      res.send({ errorSource: "JWT" });
-    }
-    console.log(decoded);
-    UserModel.findById(decoded.id)
-      .select(["-password", "-email"])
-      .then((result) => {
-        console.log(result);
-        res.send(result);
-      })
-      .catch((err) => res.send(err));
-  });
+router.get("/info", authenticateToken, function (req, res, next) {
+  const user = req.user;
+  UserModel.findById(user.id)
+    .select(["-password", "-email"])
+    .then((result) => {
+      console.log(result);
+      res.send(result);
+    })
+    .catch((err) => res.send(err));
 });
 
 router.post("/register", (req, res, next) => {
