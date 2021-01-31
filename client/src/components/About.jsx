@@ -52,7 +52,10 @@ export default class About extends Component {
                 to database.{" "}
               </li>
               <li>Database schema using Mongoose</li>
-              <li>Authentication using JWT</li>
+              <li>
+                Authentication using JWT & staying logged in after refreshing
+                page
+              </li>
             </ul>
           </div>
 

@@ -43,6 +43,16 @@ h3 {
   color: var(--secondary);
 }
 
+/* form {
+  max-width: 800px;
+  display: grid;
+  place-content: center;
+} */
+
+/* input {
+  max-width: 300px;
+} */
+
 .btn {
   text-transform: uppercase;
   letter-spacing: 0.05em;

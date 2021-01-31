@@ -3,6 +3,8 @@ import Axios from "axios";
 import { loggContext } from "./context";
 import { FaUserCircle } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
+import security from "../assets/images/security.svg";
+import photo from "../assets/images/photo.svg";
 
 export default function Settings() {
   const { setIsLogged, profilePhoto, setProfilePhoto, setUpdate } = useContext(
@@ -109,8 +111,17 @@ export default function Settings() {
 
   return (
     <div className="container">
-      <h2 className="py-3 text-left">Change Password</h2>
       <form onSubmit={submit}>
+        <header className="d-flex align-items-center flex-wrap-reverse">
+          <h2 className="py-3 text-left">Change Password</h2>
+          <figure className="my-3 container">
+            <img
+              src={security}
+              alt="cat face next to lock"
+              className="message-image"
+            />
+          </figure>
+        </header>
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Current Password</label>
           <input
@@ -147,8 +158,17 @@ export default function Settings() {
           correct current password
         </div>
       ) : null}
-      <h2 className="py-3 text-left">Change profile photo</h2>
       <form encType="multipart/form-data" onSubmit={submitPhoto}>
+        <header className="d-flex align-items-center flex-wrap-reverse mt-5">
+          <h2 className="py-3 text-left">Change profile photo</h2>
+          <figure className="my-3 container">
+            <img
+              src={photo}
+              alt="cat face next to lock"
+              className="message-image"
+            />
+          </figure>
+        </header>
         <div className="image-input">
           <label
             htmlFor="upload-button"

@@ -49,15 +49,11 @@ export default function RegisterFunction() {
   };
 
   return (
-    <section className="registration ">
-      <form
-        className="container"
-        onSubmit={submit}
-        encType="multipart/form-data"
-      >
+    <section className="registration container">
+      <form onSubmit={submit} encType="multipart/form-data">
         <header className="d-flex align-items-center flex-wrap-reverse">
           <h2 className="display-4 py-3 text-left">Registration</h2>
-          <figure className="my-3 container">
+          <figure className="my-3">
             <img
               src={register}
               alt="mobile with the bubble with cat inside of it as a metaphore for signing in"

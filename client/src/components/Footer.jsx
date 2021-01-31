@@ -3,7 +3,7 @@ import logo from "../assets/images/logo-AR.svg";
 
 export default function Footer() {
   return (
-    <footer>
+    <footer className="mt-5">
       <p>
         Ilustrations comes from{" "}
         <a href="https://icons8.com">https://icons8.com</a>
