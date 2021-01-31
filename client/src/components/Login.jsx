@@ -6,7 +6,7 @@ import login from "../assets/images/login.svg";
 import denied from "../assets/images/access_denied.svg";
 
 export default function Login(props) {
-  const { setIsLogged } = useContext(loggContext);
+  const { setIsLogged, setProfilePhoto } = useContext(loggContext);
 
   const [loginData, setData] = useState({});
   const [warning, setWarning] = useState(false);
@@ -34,7 +34,7 @@ export default function Login(props) {
           setIsLogged(true);
           props.setLoggedUser(res.data.uname);
           props.setUserId(res.data.email);
-          props.setProfilePhoto(res.data.profileImage);
+          setProfilePhoto(res.data.profileImage);
           setData({});
         } else {
           setWarning(true);

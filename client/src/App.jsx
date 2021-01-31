@@ -34,6 +34,7 @@ export default function Main() {
         userID: userID,
         profilePhoto: profilePhoto,
         setIsLogged: setIsLogged,
+        setProfilePhoto: setProfilePhoto,
       }}
     >
       <Router>
@@ -62,11 +63,7 @@ export default function Main() {
               {isLogged ? (
                 <Redirect to="/profile" />
               ) : (
-                <Login
-                  setLoggedUser={setLoggedUser}
-                  setUserId={setUserId}
-                  setProfilePhoto={setProfilePhoto}
-                />
+                <Login setLoggedUser={setLoggedUser} setUserId={setUserId} />
               )}
             </Route>
             <Route path="/logout">

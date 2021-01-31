@@ -39,7 +39,9 @@ router.get("/info", authenticateToken, (req, res, next) => {
       console.log(result);
       res.send(result);
     })
-    .catch((err) => res.send(err));
+    .catch((err) => {
+      res.send(err);
+    });
 });
 
 router.post("/register", (req, res, next) => {
@@ -147,8 +149,11 @@ router.put(
       { useFindAndModify: false }
     )
       .then((result) => {
-        console.log(result);
-        res.send(result);
+        if (result) {
+          res.send({ updated: true });
+        } else {
+          res.send({ updated: false });
+        }
       })
       .catch((err) => {
         res.send(err);

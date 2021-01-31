@@ -5,14 +5,17 @@ import { FaUserCircle } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 
 export default function Settings() {
-  const { userID, setIsLogged } = useContext(loggContext);
+  const { userID, setIsLogged, profilePhoto, setProfilePhoto } = useContext(
+    loggContext
+  );
 
   const [image, setImage] = useState({ preview: "", raw: "" });
 
   const [data, setData] = useState({ userID });
   const [success, setSuccess] = useState(false);
-  const [photoSuccess, setPhotoSuccess] = useState(false);
   const [warning, setWarning] = useState(false);
+  const [photoSuccess, setPhotoSuccess] = useState(false);
+  const [photoWarning, setPhotoWarning] = useState(false);
 
   let history = useHistory();
 
@@ -27,7 +30,10 @@ export default function Settings() {
           history.push("/error");
           setIsLogged(false);
         } else if (res.data._id) {
-          setImage({ ...image, preview: res.data.profileImage });
+          setImage({
+            ...image,
+            preview: res.data.profileImage,
+          });
         } else {
           console.log("you are not logged!");
         }
@@ -45,6 +51,8 @@ export default function Settings() {
   };
 
   const getPhoto = (e) => {
+    setPhotoSuccess(false);
+    setPhotoWarning(false);
     if (e.target.files.length) {
       setImage({
         preview: URL.createObjectURL(e.target.files[0]),
@@ -88,8 +96,11 @@ export default function Settings() {
     })
       .then((res) => {
         console.log(res);
-        if (res.data.nModified > 0) {
+        if (res.data.updated) {
           setPhotoSuccess(true);
+        } else {
+          setImage({ ...image, preview: profilePhoto });
+          setPhotoWarning(true);
         }
       })
       .catch((err) => console.log(err));
@@ -175,7 +186,12 @@ export default function Settings() {
       </form>
       {photoSuccess ? (
         <div className="alert-success m-3 p-3">
-          Your profile photo was changed
+          Your profile photo was successfully changed :)
+        </div>
+      ) : null}
+      {photoWarning ? (
+        <div className="alert-danger m-3 p-3">
+          Your profile photo could not be changed, please try later
         </div>
       ) : null}
     </div>
