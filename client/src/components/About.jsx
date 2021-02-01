@@ -56,17 +56,23 @@ export default class About extends Component {
                 Authentication using JWT & staying logged in after refreshing
                 page
               </li>
+              <li>encrypting (hashing) passwords using bcrypt</li>
             </ul>
           </div>
 
           <div>
-            <strong className="text-left mb-2"> feature plans</strong>
+            <strong className="text-left mb-2"> Feature plans:</strong>
             <ul className="text-left">
               <li>
                 Adding possibility to write messages between users (than hide
                 emails in the user list)
               </li>
-              <li>encrypting (hashing) passwords</li>
+              <li>add some forum function?</li>
+              <li>
+                more settings for user (cats and their names and photos for
+                example :D )
+              </li>
+              <li>ratings for the posts in forum</li>
             </ul>
           </div>
         </section>
