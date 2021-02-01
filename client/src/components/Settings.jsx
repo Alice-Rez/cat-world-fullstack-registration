@@ -75,14 +75,17 @@ export default function Settings() {
     })
       .then((res) => {
         console.log(res);
-        if (res.data.nModified > 0) {
-          setSuccess(true);
+        if (res.data.errorSource === "password verification") {
+          setWarning(true);
           // e.target.reset();
         } else {
-          setWarning(true);
+          setSuccess(true);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        // history.push("/ooo");
+      });
   };
 
   const submitPhoto = (e) => {
@@ -106,7 +109,10 @@ export default function Settings() {
           setPhotoWarning(true);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        history.push("/ooo");
+      });
   };
 
   return (

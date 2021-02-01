@@ -1,6 +1,6 @@
 import Axios from "axios";
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { loggContext } from "./context";
 import login from "../assets/images/login.svg";
 import denied from "../assets/images/access_denied.svg";
@@ -10,6 +10,8 @@ export default function Login(props) {
 
   const [loginData, setData] = useState({});
   const [warning, setWarning] = useState(false);
+
+  let history = useHistory();
 
   const getData = (e) => {
     setWarning(false);
@@ -39,7 +41,10 @@ export default function Login(props) {
           setWarning(true);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        history.push("/ooo");
+      });
   };
 
   return (

@@ -5,6 +5,7 @@ var router = express.Router();
 let multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 const { authenticateToken } = require("../controllers/authControllers");
+const bcrypt = require("bcrypt");
 
 require("dotenv").config();
 
@@ -102,10 +103,21 @@ router.post("/register", (req, res, next) => {
       password: newUser.password,
     });
 
-    addedUser
-      .save()
-      .then((result) => res.send(result))
-      .catch((err) => res.send(err));
+    bcrypt.hash(newUser.password, 10, (err, hashedPassword) => {
+      if (!err) {
+        addedUser.password = hashedPassword;
+        addedUser
+          .save()
+          .then((result) => {
+            res.send({ registered: true });
+          })
+          .catch((err) => {
+            res.send(err);
+          });
+      } else {
+        res.send({ errorSource: "BCRYPT" });
+      }
+    });
   }
 });
 
@@ -115,26 +127,35 @@ router.post("/login", (req, res, next) => {
   req.check("password", "password length").trim().escape();
   let { email, password } = req.body;
 
-  UserModel.find({ email: email, password: password })
-    .then((result) => {
-      if (result.length) {
-        let token = jwt.sign({ id: result[0]._id }, process.env.JWT_SECRET, {
-          expiresIn: "3d",
+  UserModel.find({ email: email })
+    .then((users) => {
+      if (users.length) {
+        let user = users[0];
+        bcrypt.compare(password, user.password, (err, result) => {
+          if (err) {
+            res.send({ errorSource: "BCRYPT" });
+          } else {
+            if (result) {
+              let token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+                expiresIn: "3d",
+              });
+              res.cookie("token", token, {
+                httpOnly: true,
+                sameSite: "strict",
+                // secure: true, // causing problems with cat-lovers!
+              });
+              console.log(token);
+
+              res.send({
+                logged: result,
+                uname: user.uname,
+                profileImage: user.profileImage,
+              });
+            } else {
+              res.send({ logged: result });
+            }
+          }
         });
-        res.cookie("token", token, {
-          httpOnly: true,
-          sameSite: "strict",
-          // secure: true, // causing problems with cat-lovers!
-        });
-        console.log(token);
-        let user = result[0];
-        res.send({
-          logged: true,
-          uname: user.uname,
-          profileImage: user.profileImage,
-        });
-      } else {
-        res.send({ logged: false });
       }
     })
     .catch((err) => res.send(err));
@@ -148,12 +169,34 @@ router.get("/logout", (req, res, next) => {
 router.put("/updatePWD", authenticateToken, (req, res, next) => {
   const userID = req.user.id;
   let { password, newPassword } = req.body;
-  UserModel.updateOne(
-    { _id: userID, password: password },
-    { password: newPassword }
-  )
-    .then((result) => {
-      res.send(result);
+  UserModel.findById(userID)
+    .select("password")
+    .then((user) => {
+      bcrypt.compare(password, user.password, (err, result) => {
+        if (err) {
+          res.send({ errorSource: "BCRYPT" });
+        } else {
+          if (result) {
+            bcrypt.hash(newPassword, 10, (err, hashedPasswordNew) => {
+              if (!err) {
+                UserModel.findByIdAndUpdate(userID, {
+                  password: hashedPasswordNew,
+                })
+                  .then((update) => {
+                    res.send({ updated: true });
+                  })
+                  .catch((err) => {
+                    res.send(err);
+                  });
+              } else {
+                res.send({ errorSource: "BCRYPT" });
+              }
+            });
+          } else {
+            res.send({ errorSource: "password verification" });
+          }
+        }
+      });
     })
     .catch((err) => {
       res.send(err);
