@@ -67,7 +67,7 @@ export default class About extends Component {
                 Adding possibility to write messages between users (than hide
                 emails in the user list)
               </li>
-              <li>add some forum function?</li>
+              <li>create forum with possibility of post writing</li>
               <li>
                 more settings for user (cats and their names and photos for
                 example :D )
