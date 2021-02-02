@@ -6,7 +6,7 @@ Explore [Live demo](https://cat-world-full.herokuapp.com) or look at previews in
 
 ## Description
 
-Basic MERN fullstack application to create user profiles where some of the functions/pages are available exclusively just for login users. To make it more interesting, everything is wrapped in cat theme using illustrations from [icons8](https://icons8.com). Made as an exercise during final stage of my one year web development course. Frontend created in React, backend in Express with MongoDB as a database and Mongoose for object modelling.
+Basic MERN fullstack application to create user profiles where some of the functions/pages are available exclusively just for logged users. To make it more interesting, everything is wrapped in cat theme using illustrations from [icons8](https://icons8.com). Made as an exercise during final stage of my one year web development course. Frontend created in React, backend in Express with MongoDB as a database and Mongoose for object modelling.
 
 File structure for deploying on heroku.
 
