@@ -18,6 +18,7 @@ export default function Settings() {
   const [warning, setWarning] = useState(false);
   const [photoSuccess, setPhotoSuccess] = useState(false);
   const [photoWarning, setPhotoWarning] = useState(false);
+  const [msg, setMsg] = useState(false);
 
   let history = useHistory();
 
@@ -49,6 +50,7 @@ export default function Settings() {
   const getValue = (e) => {
     setSuccess(false);
     setWarning(false);
+    setMsg(false);
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
@@ -65,8 +67,6 @@ export default function Settings() {
 
   const submit = (e) => {
     e.preventDefault();
-    setSuccess(false);
-    setSuccess(false);
     console.log("request send", data);
     Axios({
       method: "PUT",
@@ -78,6 +78,8 @@ export default function Settings() {
         if (res.data.errorSource === "password verification") {
           setWarning(true);
           // e.target.reset();
+        } else if (res.data.msg) {
+          setMsg(true);
         } else {
           setSuccess(true);
         }
@@ -148,6 +150,11 @@ export default function Settings() {
             id="exampleInputPassword1"
             onInput={getValue}
           />
+          {msg ? (
+            <small className="text-danger mt-1">
+              Your password is too short, you need at least 10 characters
+            </small>
+          ) : null}
         </div>
         <div className="text-right">
           <button type="submit" className="btn btn-submit btn-lg">
