@@ -128,42 +128,66 @@ router.get("/logout", (req, res, next) => {
   res.send({ logged: false });
 });
 
-router.put("/updatePWD", validateData, authenticateToken, (req, res, next) => {
-  const userID = req.user.id;
-  let { password, newPassword } = req.body;
-  UserModel.findById(userID)
-    .select("password")
-    .then((user) => {
-      bcrypt.compare(password, user.password, (err, result) => {
-        if (err) {
-          res.send({ errorSource: "BCRYPT" });
-        } else {
-          if (result) {
-            bcrypt.hash(newPassword, 10, (err, hashedPasswordNew) => {
-              if (!err) {
-                UserModel.findByIdAndUpdate(userID, {
-                  password: hashedPasswordNew,
-                })
-                  .then((update) => {
-                    res.send({ updated: true });
-                  })
-                  .catch((err) => {
-                    res.send(err);
-                  });
-              } else {
-                res.send({ errorSource: "BCRYPT" });
-              }
-            });
-          } else {
-            res.send({ errorSource: "password verification" });
-          }
-        }
-      });
-    })
-    .catch((err) => {
-      res.send(err);
+router.put(
+  "/updatePWD",
+  validateData,
+  authenticateToken,
+  verifyPassword,
+  (req, res, next) => {
+    const userID = req.user.id;
+    let { newPassword } = req.body;
+    bcrypt.hash(newPassword, 10, (err, hashedPasswordNew) => {
+      if (!err) {
+        UserModel.findByIdAndUpdate(userID, {
+          password: hashedPasswordNew,
+        })
+          .then((update) => {
+            console.log(update);
+            res.send({ updated: true });
+          })
+          .catch((err) => {
+            res.send(err);
+          });
+      } else {
+        res.send({ errorSource: "BCRYPT" });
+      }
     });
-});
+
+    // let { password, newPassword } = req.body;
+    // UserModel.findById(userID)
+    //   .select("password")
+    //   .then((user) => {
+    //     bcrypt.compare(password, user.password, (err, result) => {
+    //       if (err) {
+    //         res.send({ errorSource: "BCRYPT" });
+    //       } else {
+    //         if (result) {
+    //           bcrypt.hash(newPassword, 10, (err, hashedPasswordNew) => {
+    //             if (!err) {
+    //               UserModel.findByIdAndUpdate(userID, {
+    //                 password: hashedPasswordNew,
+    //               })
+    //                 .then((update) => {
+    //                   res.send({ updated: true });
+    //                 })
+    //                 .catch((err) => {
+    //                   res.send(err);
+    //                 });
+    //             } else {
+    //               res.send({ errorSource: "BCRYPT" });
+    //             }
+    //           });
+    //         } else {
+    //           res.send({ errorSource: "password verification" });
+    //         }
+    //       }
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     res.send(err);
+    //   });
+  }
+);
 
 router.put(
   "/updatePhoto",

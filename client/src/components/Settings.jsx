@@ -78,9 +78,11 @@ export default function Settings() {
         if (res.data.errorSource === "password verification") {
           setWarning(true);
           // e.target.reset();
-        } else if (res.data.msg) {
+        }
+        if (res.data.msg) {
           setMsg(true);
-        } else {
+        }
+        if (res.data.updated === true) {
           setSuccess(true);
         }
       })
@@ -139,6 +141,7 @@ export default function Settings() {
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             onInput={getValue}
+            required
           />
         </div>
         <div className="form-group">
@@ -149,6 +152,7 @@ export default function Settings() {
             className="form-control"
             id="exampleInputPassword1"
             onInput={getValue}
+            required
           />
           {msg ? (
             <small className="text-danger mt-1">
