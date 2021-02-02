@@ -1,8 +1,10 @@
 # Registration for React app
 
+**"Join our cat-loving community and explore new cat illustration on each page!"**
+
 ## Description
 
-Just a small full-stack exercise from DCI one year web developer course.
+Basic MERN fullstack application to create user profiles where some of the functions/pages are available exclusively just for login users. To make it more interesting, everything is wrapped in cat theme using illustrations from [icons8](https://icons8.com). Made as an exercise during final stage of my one year web development course. Frontend created in React, backend in Express with MongoDB as a database and Mongoose for object modelling.
 
 Demo of the registration in the react app:
 
