@@ -136,22 +136,26 @@ router.put(
   (req, res, next) => {
     const userID = req.user.id;
     let { newPassword } = req.body;
-    bcrypt.hash(newPassword, 10, (err, hashedPasswordNew) => {
-      if (!err) {
-        UserModel.findByIdAndUpdate(userID, {
-          password: hashedPasswordNew,
-        })
-          .then((update) => {
-            console.log(update);
-            res.send({ updated: true });
+    if (!newPassword) {
+      res.send({ msg: "empty new password" });
+    } else {
+      bcrypt.hash(newPassword, 10, (err, hashedPasswordNew) => {
+        if (!err) {
+          UserModel.findByIdAndUpdate(userID, {
+            password: hashedPasswordNew,
           })
-          .catch((err) => {
-            res.send(err);
-          });
-      } else {
-        res.send({ errorSource: "BCRYPT" });
-      }
-    });
+            .then((update) => {
+              console.log(update);
+              res.send({ updated: true });
+            })
+            .catch((err) => {
+              res.send(err);
+            });
+        } else {
+          res.send({ errorSource: "BCRYPT" });
+        }
+      });
+    }
   }
 );
 

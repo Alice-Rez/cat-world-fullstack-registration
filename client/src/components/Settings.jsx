@@ -67,6 +67,9 @@ export default function Settings() {
 
   const submit = (e) => {
     e.preventDefault();
+    setSuccess(false);
+    setWarning(false);
+    setMsg(false);
     console.log("request send", data);
     Axios({
       method: "PUT",
