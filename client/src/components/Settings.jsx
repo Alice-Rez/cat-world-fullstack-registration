@@ -152,7 +152,6 @@ export default function Settings() {
             className="form-control"
             id="exampleInputPassword1"
             onInput={getValue}
-            required
           />
           {msg ? (
             <small className="text-danger mt-1">

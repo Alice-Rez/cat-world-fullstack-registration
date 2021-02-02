@@ -60,12 +60,12 @@ allowedAccess.verifyPassword = (req, res, next) => {
                 req.user = user;
                 next();
               } else {
-                res.send({ logged: false, errorSource: "wrong pwd" });
+                res.send({ logged: false });
               }
             }
           });
         } else {
-          res.send({ errorSource: "No user" });
+          res.send({ logged: false });
         }
       })
       .catch((err) => {

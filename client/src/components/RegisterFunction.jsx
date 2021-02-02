@@ -11,9 +11,11 @@ export default function RegisterFunction() {
   const [msg, setMsg] = useState({});
   const [warning, setWarning] = useState(false);
   const [warningContent, setWarningContent] = useState("");
+  const [warningValidation, setWarningValidation] = useState(false);
 
   const getValue = (e) => {
     setWarning(false);
+    setWarningValidation(false);
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
@@ -41,6 +43,12 @@ export default function RegisterFunction() {
         } else if (res.data.code === 11000) {
           setWarningContent(Object.keys(res.data.keyValue)[0]);
           setWarning(true);
+        }
+        if (
+          res.data._message === "users validation failed" ||
+          res.data.errorSource === "BCRYPT"
+        ) {
+          setWarningValidation(true);
         } else {
           history.push("/login");
         }
@@ -85,7 +93,6 @@ export default function RegisterFunction() {
             type="text"
             name="email"
             id="mail"
-            required
             className="form-control"
             onInput={getValue}
           />
@@ -101,7 +108,6 @@ export default function RegisterFunction() {
             type="text"
             name="uname"
             id="date"
-            required
             className="form-control"
             onInput={getValue}
           />
@@ -117,7 +123,6 @@ export default function RegisterFunction() {
             type="password"
             name="password"
             id="pwd"
-            required
             className="form-control"
             onInput={getValue}
           />
@@ -146,6 +151,9 @@ export default function RegisterFunction() {
               User with this {warningContent} already exists, please log-in
             </p>
           </div>
+        ) : null}
+        {warningValidation ? (
+          <p className="alert-danger p-3">Please fill all fields!</p>
         ) : null}
       </form>
     </section>
