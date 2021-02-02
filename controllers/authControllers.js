@@ -46,7 +46,7 @@ allowedAccess.verifyPassword = (req, res, next) => {
       });
   } else {
     userID = req.body.email;
-    UserModel.find({ email: email })
+    UserModel.find({ email: userID })
       .then((users) => {
         if (users.length) {
           let user = users[0];
@@ -58,10 +58,12 @@ allowedAccess.verifyPassword = (req, res, next) => {
                 req.user = user;
                 next();
               } else {
-                res.send({ logged: result });
+                res.send({ logged: false, errorSource: "wrong pwd" });
               }
             }
           });
+        } else {
+          res.send({ errorSource: "No user" });
         }
       })
       .catch((err) => res.send(err));
