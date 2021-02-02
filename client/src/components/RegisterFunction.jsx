@@ -43,8 +43,7 @@ export default function RegisterFunction() {
         } else if (res.data.code === 11000) {
           setWarningContent(Object.keys(res.data.keyValue)[0]);
           setWarning(true);
-        }
-        if (
+        } else if (
           res.data._message === "users validation failed" ||
           res.data.errorSource === "BCRYPT"
         ) {
@@ -80,6 +79,7 @@ export default function RegisterFunction() {
             id="name"
             className="form-control"
             onInput={getValue}
+            required
           />
           {msg.fullName ? (
             <small className="text-danger mt-1">
@@ -95,6 +95,7 @@ export default function RegisterFunction() {
             id="mail"
             className="form-control"
             onInput={getValue}
+            required
           />
           {msg.email ? (
             <small className="text-danger mt-1">
@@ -110,6 +111,7 @@ export default function RegisterFunction() {
             id="date"
             className="form-control"
             onInput={getValue}
+            required
           />
           {msg.uname ? (
             <small className="text-danger mt-1">
@@ -125,6 +127,7 @@ export default function RegisterFunction() {
             id="pwd"
             className="form-control"
             onInput={getValue}
+            required
           />
           {msg.password ? (
             <small className="text-danger mt-1">
