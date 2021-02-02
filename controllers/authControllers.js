@@ -1,4 +1,5 @@
 var jwt = require("jsonwebtoken");
+const { UserModel } = require("../model/UserModel");
 require("dotenv").config();
 
 const allowedAccess = {};

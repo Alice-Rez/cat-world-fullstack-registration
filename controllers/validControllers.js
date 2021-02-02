@@ -15,7 +15,6 @@ const validateData = (req, res, next) => {
   if (newPassword) {
     req.check("newPassword", "password length").isLength({ min: 10 });
   }
-
   Object.keys(req.body).map((input) => {
     req.check(`${input}`).trim().escape();
   });
