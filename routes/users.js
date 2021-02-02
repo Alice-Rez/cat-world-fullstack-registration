@@ -4,7 +4,10 @@ var jwt = require("jsonwebtoken");
 var router = express.Router();
 let multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
-const { authenticateToken } = require("../controllers/authControllers");
+const {
+  authenticateToken,
+  verifyPassword,
+} = require("../controllers/authControllers");
 const validateData = require("../controllers/validControllers");
 const bcrypt = require("bcrypt");
 
@@ -100,42 +103,24 @@ router.post("/register", validateData, (req, res, next) => {
   });
 });
 
-router.post("/login", validateData, (req, res, next) => {
-  console.log(req.body);
-  let { email, password } = req.body;
+router.post("/login", validateData, verifyPassword, (req, res, next) => {
+  const user = req.user;
 
-  UserModel.find({ email: email })
-    .then((users) => {
-      if (users.length) {
-        let user = users[0];
-        bcrypt.compare(password, user.password, (err, result) => {
-          if (err) {
-            res.send({ errorSource: "BCRYPT" });
-          } else {
-            if (result) {
-              let token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-                expiresIn: "3d",
-              });
-              res.cookie("token", token, {
-                httpOnly: true,
-                sameSite: "strict",
-                // secure: true, // causing problems with cat-lovers!
-              });
-              console.log(token);
+  let token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: "3d",
+  });
+  res.cookie("token", token, {
+    httpOnly: true,
+    sameSite: "strict",
+    // secure: true, // causing problems with cat-lovers!
+  });
+  console.log(token);
 
-              res.send({
-                logged: result,
-                uname: user.uname,
-                profileImage: user.profileImage,
-              });
-            } else {
-              res.send({ logged: result });
-            }
-          }
-        });
-      }
-    })
-    .catch((err) => res.send(err));
+  res.send({
+    logged: true,
+    uname: user.uname,
+    profileImage: user.profileImage,
+  });
 });
 
 router.get("/logout", (req, res, next) => {

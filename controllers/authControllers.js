@@ -1,4 +1,5 @@
 var jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const { UserModel } = require("../model/UserModel");
 require("dotenv").config();
 
@@ -67,7 +68,9 @@ allowedAccess.verifyPassword = (req, res, next) => {
           res.send({ errorSource: "No user" });
         }
       })
-      .catch((err) => res.send(err));
+      .catch((err) => {
+        res.send(err);
+      });
   }
 };
 
