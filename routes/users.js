@@ -5,6 +5,7 @@ var router = express.Router();
 let multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 const { authenticateToken } = require("../controllers/authControllers");
+const validateData = require("../controllers/validControllers");
 const bcrypt = require("bcrypt");
 
 require("dotenv").config();
@@ -71,60 +72,36 @@ router.get("/info", authenticateToken, (req, res, next) => {
     });
 });
 
-router.post("/register", (req, res, next) => {
+router.post("/register", validateData, (req, res, next) => {
   console.log(req.body);
-  req
-    .check("fullName", "fullname")
-    .custom((value) => {
-      return value.match(/^[A-Za-z ]+$/);
-    })
-    .trim()
-    .escape();
-  req.check("email", "email").isEmail().trim().escape();
-  req
-    .check("password", "password length")
-    .isLength({ min: 10 })
-    .trim()
-    .escape();
-  req.check("uname", "uname").isAlphanumeric().trim().escape();
+  let newUser = req.body;
 
-  let errors = req.validationErrors();
+  let addedUser = new UserModel({
+    fullName: newUser.fullName,
+    email: newUser.email,
+    uname: newUser.uname,
+    password: newUser.password,
+  });
 
-  if (errors) {
-    res.send({ msg: errors });
-  } else {
-    console.log(req.body);
-    let newUser = req.body;
-
-    let addedUser = new UserModel({
-      fullName: newUser.fullName,
-      email: newUser.email,
-      uname: newUser.uname,
-      password: newUser.password,
-    });
-
-    bcrypt.hash(newUser.password, 10, (err, hashedPassword) => {
-      if (!err) {
-        addedUser.password = hashedPassword;
-        addedUser
-          .save()
-          .then((result) => {
-            res.send({ registered: true });
-          })
-          .catch((err) => {
-            res.send(err);
-          });
-      } else {
-        res.send({ errorSource: "BCRYPT" });
-      }
-    });
-  }
+  bcrypt.hash(newUser.password, 10, (err, hashedPassword) => {
+    if (!err) {
+      addedUser.password = hashedPassword;
+      addedUser
+        .save()
+        .then((result) => {
+          res.send({ registered: true });
+        })
+        .catch((err) => {
+          res.send(err);
+        });
+    } else {
+      res.send({ errorSource: "BCRYPT" });
+    }
+  });
 });
 
-router.post("/login", (req, res, next) => {
+router.post("/login", validateData, (req, res, next) => {
   console.log(req.body);
-  req.check("email", "email").trim().escape();
-  req.check("password", "password length").trim().escape();
   let { email, password } = req.body;
 
   UserModel.find({ email: email })
@@ -166,7 +143,7 @@ router.get("/logout", (req, res, next) => {
   res.send({ logged: false });
 });
 
-router.put("/updatePWD", authenticateToken, (req, res, next) => {
+router.put("/updatePWD", validateData, authenticateToken, (req, res, next) => {
   const userID = req.user.id;
   let { password, newPassword } = req.body;
   UserModel.findById(userID)
