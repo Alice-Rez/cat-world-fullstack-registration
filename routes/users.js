@@ -152,40 +152,6 @@ router.put(
         res.send({ errorSource: "BCRYPT" });
       }
     });
-
-    // let { password, newPassword } = req.body;
-    // UserModel.findById(userID)
-    //   .select("password")
-    //   .then((user) => {
-    //     bcrypt.compare(password, user.password, (err, result) => {
-    //       if (err) {
-    //         res.send({ errorSource: "BCRYPT" });
-    //       } else {
-    //         if (result) {
-    //           bcrypt.hash(newPassword, 10, (err, hashedPasswordNew) => {
-    //             if (!err) {
-    //               UserModel.findByIdAndUpdate(userID, {
-    //                 password: hashedPasswordNew,
-    //               })
-    //                 .then((update) => {
-    //                   res.send({ updated: true });
-    //                 })
-    //                 .catch((err) => {
-    //                   res.send(err);
-    //                 });
-    //             } else {
-    //               res.send({ errorSource: "BCRYPT" });
-    //             }
-    //           });
-    //         } else {
-    //           res.send({ errorSource: "password verification" });
-    //         }
-    //       }
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     res.send(err);
-    //   });
   }
 );
 
