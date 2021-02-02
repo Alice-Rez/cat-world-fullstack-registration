@@ -1,4 +1,4 @@
-# Registration for React app
+# Cat World
 
 **"Join our cat-loving community and explore new cat illustration on each page!"**
 
