@@ -13,9 +13,10 @@ allowedAccess.authenticateToken = (req, res, next) => {
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) {
       res.send({ errorSource: "JWT" });
+    } else {
+      req.user = user;
+      next();
     }
-    req.user = user;
-    next();
   });
 };
 
