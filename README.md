@@ -27,6 +27,10 @@ Basic MERN fullstack application to create user profiles where some of the funct
 - Authentication using JWT with staying logged in after refreshing page (token stored in cookie)
 - encrypting (hashing) passwords using bcrypt
 
+**Used technologies:** React, React Hooks, React Context, Express.js, MongoDB, Bootstrap, CSS-variables, CSS, HTML
+
+**Used packages:** Axios, Mongoose, Multer (for image saving), Cors, Dotenv, Express-validator, uid (uuid used as a name of image file), Bcrypt, Jsonwebtoken,
+
 ## Setup
 
 1. clone this repository
