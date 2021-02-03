@@ -1,4 +1,4 @@
-# Cat World
+<h1><img align="center" src="./README_materials/CW-title.png" width="80%"> </h1>
 
 **"Join our cat-loving community and explore new cat illustration on each page!"**
 
