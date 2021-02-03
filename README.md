@@ -8,6 +8,8 @@ Explore [Live demo](https://cat-world-full.herokuapp.com) or look at previews in
 
 Basic MERN fullstack application to create user profiles where some of the functions/pages are available exclusively just for logged users. To make it more interesting, everything is wrapped in cat theme using illustrations from [icons8](https://icons8.com). Made as an exercise during final stage of my one year web development course. Frontend created in React, backend in Express with MongoDB as a database and Mongoose for object modelling.
 
+<img align="right" src="./README_materials/CW.png" width="60%">
+
 **Implemented features:**
 
 - Sign up with displaying error messages when inputs does not correspond validations or when user already exists
@@ -40,6 +42,18 @@ Basic MERN fullstack application to create user profiles where some of the funct
 5. enjoy exploring of the application
 
 ## Gallery
+
+**Fig.1** : Profile page after logged in
+
+<img align="center" src="./README_materials/CW-profile.png" width="100%">
+
+</br>
+</br>
+</br>
+
+**Fig.1** : Settings of the new password and profile image
+
+<img align="center" src="./README_materials/CW-settings.png" width="100%">
 
 ## Acknowledgement
 
