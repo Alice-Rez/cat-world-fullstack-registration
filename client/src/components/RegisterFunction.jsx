@@ -71,6 +71,11 @@ export default function RegisterFunction() {
             />
           </figure>
         </header>
+        <p className="disclaimer">
+          This is just a mock-up, please{" "}
+          <strong>do not use real data for registration</strong> (no
+          confirmation e-mail is sent for registration)
+        </p>
         <div className="form-group">
           <label htmlFor="name">Full Name</label>
           <input
