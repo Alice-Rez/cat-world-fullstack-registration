@@ -73,6 +73,7 @@ export default class About extends Component {
                 example :D )
               </li>
               <li>ratings for the posts in forum</li>
+              <li>possibility for user to delete account</li>
             </ul>
           </div>
         </section>
