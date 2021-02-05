@@ -87,6 +87,9 @@ export default function Navigation() {
                 <Link to="/settings" className="nav-link">
                   Settings
                 </Link>
+                <Link to="/delete" className="nav-link">
+                  Delete account
+                </Link>
                 <div className="dropdown-divider"></div>
                 <Link to="/logout" className="nav-link ">
                   Log out

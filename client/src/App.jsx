@@ -21,6 +21,7 @@ import RegisterFunction from "./components/RegisterFunction";
 import Settings from "./components/Settings";
 import Users from "./components/Users";
 import Messenger from "./components/Messenger";
+import DeleteAccount from "./components/DeleteAccount";
 
 export default function Main() {
   const [isLogged, setIsLogged] = useState(false);
@@ -81,6 +82,9 @@ export default function Main() {
             </Route>
             <Route path="/messenger">
               {isLogged ? <Messenger /> : <Redirect to="/login" />}
+            </Route>
+            <Route path="/delete">
+              {isLogged ? <DeleteAccount /> : <Redirect to="/login" />}
             </Route>
             <Route path="/login">
               {isLogged ? (
