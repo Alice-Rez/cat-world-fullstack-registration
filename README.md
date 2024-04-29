@@ -2,7 +2,7 @@
 
 **"Join our cat-loving community and explore new cat illustration on each page!"**
 
-Explore [Live demo](https://cat-world-full.herokuapp.com), look at previews in [Gallery](#gallery) or [Setup](#Setup) the project locally
+Look at previews in [Gallery](#gallery) or [Setup](#Setup) the project locally
 
 ## Description
 
